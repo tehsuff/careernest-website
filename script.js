@@ -1,96 +1,50 @@
-// Mobile menu toggle
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mainNav = document.getElementById('mainNav');
+// Animate stats when they come into view
+const stats = document.querySelectorAll('.stat-number');
+let animated = false;
 
-if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', () => {
-        mainNav.classList.toggle('active');
+function animateStats() {
+    if (animated) return;
+    
+    stats.forEach(stat => {
+        let target = 0;
+        const label = stat.nextElementSibling.textContent;
+        
+        if (label.includes('Young')) target = 15000;
+        else if (label.includes('TECHNOLOGY')) target = 50000;
+        else if (label.includes('TONNES')) target = 8000;
+        else if (label.includes('data')) target = 100000;
+        
+        let current = 0;
+        const increment = target / 50;
+        
+        const update = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                stat.textContent = target.toLocaleString();
+                clearInterval(update);
+            } else {
+                stat.textContent = Math.floor(current).toLocaleString();
+            }
+        }, 30);
     });
+    
+    animated = true;
 }
 
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (mainNav && mainNav.classList.contains('active')) {
-        if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-            mainNav.classList.remove('active');
-        }
-    }
-});
-
-// Number counter animation
-const statNumbers = document.querySelectorAll('.stat-number');
-
-const animateNumbers = () => {
-    statNumbers.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-target'));
-        const current = parseInt(stat.innerText);
-        
-        if (current < target) {
-            const increment = Math.ceil(target / 50);
-            const newValue = Math.min(current + increment, target);
-            stat.innerText = newValue;
-        }
-    });
-};
-
-// Intersection Observer for stats
-const observerOptions = {
-    threshold: 0.5,
-    rootMargin: '0px'
-};
-
-const statsObserver = new IntersectionObserver((entries) => {
+// Trigger animation when stats are visible
+const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            const statsSection = entry.target;
-            const stats = statsSection.querySelectorAll('.stat-number');
-            
-            stats.forEach(stat => {
-                const target = parseInt(stat.getAttribute('data-target'));
-                let current = 0;
-                
-                const updateCounter = () => {
-                    const increment = Math.ceil(target / 50);
-                    if (current < target) {
-                        current = Math.min(current + increment, target);
-                        stat.innerText = current;
-                        setTimeout(updateCounter, 20);
-                    }
-                };
-                
-                updateCounter();
-            });
-            
-            statsObserver.unobserve(statsSection);
-        }
-    });
-}, observerOptions);
-
-const impactStatsSection = document.querySelector('.impact-stats');
-if (impactStatsSection) {
-    statsObserver.observe(impactStatsSection);
-}
-
-// Smooth scroll for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            animateStats();
+            observer.unobserve(entry.target);
         }
     });
 });
 
-// Add scroll effect to header
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
-    if (window.scrollY > 100) {
-        header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
-    } else {
-        header.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
-    }
+const statsSection = document.querySelector('.impact-stats');
+if (statsSection) observer.observe(statsSection);
+
+// Mobile menu toggle
+document.querySelector('.mobile-toggle')?.addEventListener('click', () => {
+    document.querySelector('nav ul').classList.toggle('show');
 });
