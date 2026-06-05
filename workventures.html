@@ -1,0 +1,3094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Australia's Leading IT Social Enterprise | WorkVentures</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #f47920;
+    --dark-navy: #1a2e4a;
+    --mid-navy: #243d5c;
+    --light-gray: #f5f5f5;
+    --text-dark: #333;
+    --text-mid: #555;
+    --white: #fff;
+  }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-dark);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* PAGE SYSTEM */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* TOP BAR */
+  .top-bar {
+    background: var(--dark-navy);
+    color: white;
+    font-size: 12px;
+    padding: 6px 0;
+    text-align: right;
+  }
+  .top-bar .container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    align-items: center;
+  }
+  .top-bar a { color: white; text-decoration: none; font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.5px; }
+  .top-bar a:hover { color: var(--orange); }
+  .top-bar .btn-donate {
+    background: var(--orange);
+    padding: 4px 14px;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+  .top-bar .btn-shop {
+    background: transparent;
+    border: 1px solid white;
+    padding: 4px 14px;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+
+  /* HEADER / NAV */
+  header {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 80px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .logo-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .logo-icon svg { width: 30px; height: 30px; fill: white; }
+  .logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--dark-navy);
+    line-height: 1.1;
+  }
+  .logo-text span { color: var(--orange); }
+
+  nav { display: flex; align-items: center; }
+  nav ul { list-style: none; display: flex; gap: 0; }
+  nav > ul > li { position: relative; }
+  nav > ul > li > a {
+    display: block;
+    padding: 28px 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--dark-navy);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  nav > ul > li > a:hover,
+  nav > ul > li > a.active { color: var(--orange); }
+
+  /* DROPDOWN */
+  .dropdown { position: relative; }
+  .dropdown > .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 220px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    z-index: 2000;
+    border-top: 3px solid var(--orange);
+  }
+  .dropdown:hover > .submenu { display: block; }
+  .submenu li a {
+    display: block;
+    padding: 10px 18px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: var(--dark-navy);
+    text-decoration: none;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+  }
+  .submenu li a:hover { background: #f8f8f8; color: var(--orange); padding-left: 22px; }
+  .submenu .has-sub { position: relative; }
+  .submenu .has-sub > .sub-submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background: white;
+    min-width: 220px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    border-top: 3px solid var(--orange);
+  }
+  .submenu .has-sub:hover > .sub-submenu { display: block; }
+
+  /* CONTAINER */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--dark-navy) 0%, var(--mid-navy) 100%);
+    color: white;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('https://workventures.com.au/wp-content/uploads/2023/05/social-inclusion-1024x576.png') center/cover no-repeat;
+    opacity: 0.15;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 650px;
+    padding: 80px 0;
+  }
+  .hero-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 22px;
+  }
+  .hero p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    opacity: 0.9;
+    line-height: 1.8;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--orange);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 14px 30px;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background 0.2s, transform 0.15s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary:hover { background: #d96a10; transform: translateY(-1px); }
+  .btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 14px 30px;
+    text-decoration: none;
+    border-radius: 3px;
+    border: 2px solid white;
+    cursor: pointer;
+    margin-left: 12px;
+    transition: background 0.2s;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); }
+
+  /* SECTION STYLES */
+  section { padding: 70px 0; }
+  .section-light { background: white; }
+  .section-gray { background: var(--light-gray); }
+  .section-navy { background: var(--dark-navy); color: white; }
+  .section-orange { background: var(--orange); color: white; }
+
+  .section-header { text-align: center; margin-bottom: 50px; }
+  .section-header h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--dark-navy);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .section-header.white h2, .section-navy .section-header h2 { color: white; }
+  .section-header p { font-size: 16px; color: var(--text-mid); max-width: 700px; margin: 0 auto; }
+  .section-header .eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .divider {
+    width: 60px;
+    height: 4px;
+    background: var(--orange);
+    margin: 16px auto 20px;
+  }
+
+  /* ABOUT SECTION (homepage) */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .about-grid img {
+    width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  }
+  .about-grid h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--dark-navy);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .about-grid .eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .about-grid p { color: var(--text-mid); margin-bottom: 16px; line-height: 1.8; }
+
+  /* SOLUTIONS GRID */
+  .solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .solution-card {
+    padding: 40px 30px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+  .solution-card:hover { background: rgba(255,255,255,0.08); }
+  .solution-card .icon {
+    width: 70px;
+    height: 70px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 28px;
+    color: white;
+  }
+  .solution-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: white;
+  }
+  .solution-card p { font-size: 13px; opacity: 0.8; margin-bottom: 16px; line-height: 1.6; }
+  .solution-card a {
+    color: var(--orange);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .solution-card a:hover { text-decoration: underline; }
+
+  /* STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .stat-card {
+    padding: 50px 30px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.15);
+  }
+  .stat-card:last-child { border-right: none; }
+  .stat-card .stat-icon {
+    font-size: 40px;
+    color: var(--orange);
+    margin-bottom: 15px;
+  }
+  .stat-card .stat-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .stat-card .stat-number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-card .stat-desc {
+    font-size: 13px;
+    opacity: 0.75;
+    line-height: 1.5;
+  }
+
+  /* SOLUTIONS DETAILS (alternating) */
+  .solution-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    padding: 60px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .solution-detail:last-child { border-bottom: none; }
+  .solution-detail.reverse { direction: rtl; }
+  .solution-detail.reverse > * { direction: ltr; }
+  .solution-detail-img {
+    width: 100%;
+    height: 320px;
+    background: var(--dark-navy);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    color: var(--orange);
+    opacity: 0.9;
+  }
+  .solution-detail h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--dark-navy);
+    margin-bottom: 18px;
+  }
+  .solution-detail p { color: var(--text-mid); margin-bottom: 16px; line-height: 1.8; }
+
+  /* TESTIMONIALS */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+  .testimonial-card {
+    background: white;
+    border-radius: 6px;
+    padding: 30px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+    border-top: 4px solid var(--orange);
+  }
+  .testimonial-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-mid);
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .testimonial-card p::before { content: '\201C'; font-size: 30px; color: var(--orange); line-height: 0; vertical-align: -10px; margin-right: 4px; }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .testimonial-author .avatar {
+    width: 42px;
+    height: 42px;
+    background: var(--dark-navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .testimonial-author strong {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dark-navy);
+  }
+  .testimonial-author span { font-size: 12px; color: var(--text-mid); }
+
+  /* PROGRAMS GRID */
+  .programs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+  }
+  .program-card {
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .program-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
+  .program-card-img {
+    height: 160px;
+    background: var(--dark-navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    color: var(--orange);
+  }
+  .program-card-body { padding: 20px; }
+  .program-card-body h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark-navy);
+    margin-bottom: 8px;
+  }
+  .program-card-body p { font-size: 13px; color: var(--text-mid); margin-bottom: 14px; line-height: 1.6; }
+  .program-card-body a {
+    color: var(--orange);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* PARTNERS LOGOS */
+  .partners-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+  .partner-logo {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    height: 60px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-mid);
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .partner-logo:hover { border-color: var(--orange); }
+
+  /* CONTACT FORM */
+  .contact-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+  .contact-form h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--dark-navy);
+    margin-bottom: 30px;
+  }
+  .form-group { margin-bottom: 18px; }
+  .form-group label {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--dark-navy);
+    margin-bottom: 6px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-dark);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--orange); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .contact-info h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 24px;
+  }
+  .contact-info-block { background: var(--mid-navy); padding: 40px; border-radius: 6px; }
+  .contact-item { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 24px; }
+  .contact-item .ci-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .contact-item div p { color: rgba(255,255,255,0.75); font-size: 14px; margin-top: 3px; }
+  .contact-item div strong { color: white; font-family: 'Montserrat', sans-serif; font-size: 14px; }
+
+  /* FOOTER */
+  footer {
+    background: #111c2d;
+    color: white;
+    padding: 60px 0 0;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .footer-logo { margin-bottom: 18px; }
+  .footer-about p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.8; margin-bottom: 14px; }
+  .footer-col h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    margin-bottom: 18px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 8px; }
+  .footer-col ul li a {
+    color: rgba(255,255,255,0.65);
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--orange); }
+  .footer-bottom {
+    padding: 22px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+  .social-links { display: flex; gap: 12px; }
+  .social-links a {
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .social-links a:hover { background: var(--orange); }
+  .footer-bottom-links { display: flex; gap: 20px; }
+  .footer-bottom-links a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footer-bottom-links a:hover { color: white; }
+
+  /* ACKNOWLEDGEMENT */
+  .acknowledgement {
+    background: var(--dark-navy);
+    padding: 20px 0;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    border-top: 2px solid var(--orange);
+  }
+
+  /* PAGE HERO (inner pages) */
+  .page-hero {
+    background: linear-gradient(135deg, var(--dark-navy) 0%, var(--mid-navy) 100%);
+    color: white;
+    padding: 70px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at center, rgba(244,121,32,0.15) 0%, transparent 70%);
+  }
+  .page-hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 44px;
+    font-weight: 900;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+  .page-hero p {
+    font-size: 17px;
+    max-width: 680px;
+    margin: 16px auto 0;
+    opacity: 0.85;
+    position: relative;
+    z-index: 1;
+  }
+  .breadcrumb {
+    background: #f0f0f0;
+    padding: 12px 0;
+    font-size: 12px;
+    color: var(--text-mid);
+  }
+  .breadcrumb a { color: var(--orange); text-decoration: none; cursor: pointer; }
+  .breadcrumb span { margin: 0 6px; }
+
+  /* CONTENT PAGE */
+  .content-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--dark-navy);
+    margin-bottom: 18px;
+  }
+  .content-section h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark-navy);
+    margin-bottom: 14px;
+  }
+  .content-section p { color: var(--text-mid); margin-bottom: 16px; line-height: 1.8; }
+  .content-section ul { margin-left: 20px; margin-bottom: 16px; }
+  .content-section ul li { color: var(--text-mid); margin-bottom: 8px; line-height: 1.7; }
+  .content-with-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 50px;
+  }
+  .sidebar-card {
+    background: var(--light-gray);
+    border-radius: 6px;
+    padding: 30px;
+    margin-bottom: 25px;
+    border-left: 4px solid var(--orange);
+  }
+  .sidebar-card h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--dark-navy);
+    margin-bottom: 12px;
+  }
+  .sidebar-card ul { list-style: none; }
+  .sidebar-card ul li a {
+    display: block;
+    padding: 7px 0;
+    color: var(--text-mid);
+    text-decoration: none;
+    font-size: 13px;
+    border-bottom: 1px solid #e5e5e5;
+    cursor: pointer;
+  }
+  .sidebar-card ul li a:hover { color: var(--orange); padding-left: 4px; }
+
+  /* FAQ */
+  .faq-item {
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+  }
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark-navy);
+  }
+  .faq-question:hover { color: var(--orange); }
+  .faq-question i { color: var(--orange); flex-shrink: 0; margin-left: 12px; transition: transform 0.3s; }
+  .faq-answer {
+    display: none;
+    padding: 0 0 18px;
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.8;
+  }
+  .faq-item.open .faq-answer { display: block; }
+  .faq-item.open .faq-question i { transform: rotate(180deg); }
+
+  /* IMPACT CARDS */
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 40px;
+  }
+  .impact-card {
+    background: white;
+    border-radius: 8px;
+    padding: 35px 25px;
+    text-align: center;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+    border-top: 4px solid var(--orange);
+  }
+  .impact-card .icon { font-size: 40px; color: var(--orange); margin-bottom: 15px; }
+  .impact-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 38px;
+    font-weight: 900;
+    color: var(--dark-navy);
+    margin-bottom: 8px;
+  }
+  .impact-card p { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+
+  /* INFO BOXES */
+  .info-box {
+    background: var(--dark-navy);
+    color: white;
+    border-radius: 6px;
+    padding: 30px;
+    margin: 30px 0;
+  }
+  .info-box h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--orange);
+  }
+  .info-box p { font-size: 14px; opacity: 0.85; line-height: 1.7; }
+
+  /* TWO COL TEXT */
+  .two-col-text {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+
+  /* CTA BANNER */
+  .cta-banner {
+    background: var(--orange);
+    padding: 50px 0;
+    text-align: center;
+    color: white;
+  }
+  .cta-banner h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .cta-banner p { font-size: 16px; margin-bottom: 25px; opacity: 0.9; }
+  .btn-white {
+    display: inline-block;
+    background: white;
+    color: var(--orange);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 14px 30px;
+    text-decoration: none;
+    border-radius: 3px;
+    cursor: pointer;
+    border: none;
+    margin: 5px;
+  }
+  .btn-white:hover { background: #f0f0f0; }
+  .btn-white-outline {
+    display: inline-block;
+    background: transparent;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 14px 30px;
+    text-decoration: none;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 2px solid white;
+    margin: 5px;
+  }
+
+  /* TEAM */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+  }
+  .team-card {
+    text-align: center;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+  }
+  .team-avatar {
+    width: 100%;
+    height: 180px;
+    background: var(--dark-navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    color: var(--orange);
+  }
+  .team-card-body { padding: 20px; }
+  .team-card-body h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark-navy);
+    margin-bottom: 5px;
+  }
+  .team-card-body span { font-size: 12px; color: var(--orange); font-weight: 600; }
+
+  /* HISTORY */
+  .timeline { position: relative; padding-left: 40px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0; bottom: 0;
+    width: 3px;
+    background: var(--orange);
+  }
+  .timeline-item { position: relative; margin-bottom: 40px; }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -36px;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--orange);
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px var(--orange);
+  }
+  .timeline-item .year {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+  }
+  .timeline-item h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark-navy);
+    margin-bottom: 8px;
+  }
+  .timeline-item p { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
+
+  /* PAGE TRANSITION */
+  .page { animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* MOBILE MENU TOGGLE */
+  .menu-toggle {
+    display: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--dark-navy);
+    background: none;
+    border: none;
+  }
+
+  /* SCROLL TO TOP */
+  .scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 44px;
+    height: 44px;
+    background: var(--orange);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 999;
+    transition: transform 0.2s;
+  }
+  .scroll-top:hover { transform: translateY(-3px); }
+
+  /* NAV ACTIVE */
+  nav .nav-active { color: var(--orange) !important; }
+
+  @media (max-width: 1024px) {
+    .solutions-grid, .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-grid, .solution-detail, .contact-section, .content-with-sidebar { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .programs-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    .menu-toggle { display: block; }
+    .hero h1 { font-size: 30px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .programs-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .two-col-text { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 15px; }
+    .impact-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="container">
+    <a href="#" onclick="nav('contact')"><i class="fas fa-phone"></i> Free Call 1800 112 205</a>
+    <a href="mailto:info@workventures.com.au"><i class="fas fa-envelope"></i> info@workventures.com.au</a>
+    <a href="#" onclick="nav('contact')" class="btn-shop">Shop</a>
+    <a href="#" onclick="nav('contact')" class="btn-donate">Donate</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a class="logo" onclick="nav('home')">
+      <div class="logo-icon">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 4 L36 14 L36 26 L20 36 L4 26 L4 14 Z" fill="white" opacity="0.9"/>
+          <path d="M20 8 L32 15 L32 25 L20 32 L8 25 L8 15 Z" fill="#f47920"/>
+          <text x="20" y="24" text-anchor="middle" fill="white" font-size="13" font-weight="bold" font-family="Montserrat">W</text>
+        </svg>
+      </div>
+      <div class="logo-text">Work<span>Ventures</span></div>
+    </a>
+    <nav>
+      <ul>
+        <li class="dropdown">
+          <a onclick="nav('about')">About Us ▾</a>
+          <ul class="submenu">
+            <li><a onclick="nav('about')">About WorkVentures</a></li>
+            <li><a onclick="nav('board')">Our Board</a></li>
+            <li><a onclick="nav('team')">Our Team</a></li>
+            <li><a onclick="nav('history')">Our History</a></li>
+            <li><a onclick="nav('founder')">Our Founder</a></li>
+            <li><a onclick="nav('governance')">Corporate Governance</a></li>
+            <li><a onclick="nav('quality')">Quality &amp; Certification</a></li>
+            <li><a onclick="nav('media')">Media Hub</a></li>
+            <li><a onclick="nav('advocacy')">Advocacy &amp; Impact</a></li>
+          </ul>
+        </li>
+        <li><a onclick="nav('social-impact')">Social Impact</a></li>
+        <li class="dropdown">
+          <a>Our Solutions ▾</a>
+          <ul class="submenu">
+            <li class="has-sub">
+              <a onclick="nav('it-solutions')">IT Solutions ›</a>
+              <ul class="sub-submenu">
+                <li><a onclick="nav('affordable-laptops')">Affordable Laptops and PCs</a></li>
+                <li><a onclick="nav('digital-inclusion')">Digital Inclusion Packages</a></li>
+                <li><a onclick="nav('cyber-security')">Cyber Security Services</a></li>
+                <li><a onclick="nav('national-device-bank')">National Device Bank</a></li>
+              </ul>
+            </li>
+            <li class="has-sub">
+              <a onclick="nav('youth-employment')">Youth Employment Solutions ›</a>
+              <ul class="sub-submenu">
+                <li><a onclick="nav('sourcing-trainees')">Sourcing Trainees</a></li>
+                <li><a onclick="nav('traineeship-program')">Traineeship Program</a></li>
+                <li><a onclick="nav('cyber-careers')">Cyber Security Careers</a></li>
+                <li><a onclick="nav('work-placement')">Work Placement Program</a></li>
+              </ul>
+            </li>
+            <li class="has-sub">
+              <a onclick="nav('logistics')">Logistics Solutions ›</a>
+              <ul class="sub-submenu">
+                <li><a onclick="nav('circularit')">WorkVentures Circular IT</a></li>
+                <li><a onclick="nav('3pl')">3PL Services</a></li>
+                <li><a onclick="nav('ewaste')">Secure E-Waste Solutions</a></li>
+                <li><a onclick="nav('commissioning')">Commissioning Solutions</a></li>
+                <li><a onclick="nav('decommissioning')">Decommissioning Solutions</a></li>
+              </ul>
+            </li>
+            <li class="has-sub">
+              <a onclick="nav('tech-solutions')">Technical Solutions ›</a>
+              <ul class="sub-submenu">
+                <li><a onclick="nav('repairs')">Repairs</a></li>
+                <li><a onclick="nav('staging')">Staging</a></li>
+                <li><a onclick="nav('refurbishment')">Refurbishment</a></li>
+                <li><a onclick="nav('tech-services')">Technical Services</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a>Get Involved ▾</a>
+          <ul class="submenu">
+            <li><a onclick="nav('donate')">Donate Technology</a></li>
+            <li><a onclick="nav('member')">Become a Member</a></li>
+          </ul>
+        </li>
+        <li><a onclick="nav('contact')">Contact Us</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ========================================================= -->
+<!-- PAGE: HOME -->
+<!-- ========================================================= -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-eyebrow">WorkVentures</div>
+        <h1>Inspiring Social Inclusion Through Technology</h1>
+        <p>For more than 43 years, WorkVentures has been committed to empowering organisations and individuals through technology.</p>
+        <a class="btn-primary" href="https://catalog.workventures.com.au/AnnualReport2024" target="_blank">WorkVentures Annual Report</a>
+        <a class="btn-outline" onclick="nav('about')">Find Out More</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="section-light">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <span class="eyebrow">about WorkVentures</span>
+          <h2>About WorkVentures</h2>
+          <p>WorkVentures is Australia's leading IT social enterprise. We are committed to creating inclusive, vibrant communities.</p>
+          <p>We help young people gain meaningful skills, training, and jobs and provide affordable technology and connectivity to those who are digitally excluded. We also combat e-waste and promote a circular economy through our device refurbishment and deliver social procurement services to our customers.</p>
+          <a class="btn-primary" onclick="nav('about')">Find Out More</a>
+        </div>
+        <div>
+          <img src="https://workventures.com.au/wp-content/uploads/2025/04/WorkVentures-2-1.avif" alt="WorkVentures" onerror="this.style.background='#1a2e4a';this.style.height='300px';this.style.display='flex';this.src='';this.alt='';">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS -->
+  <section class="section-navy" style="padding:0;">
+    <div class="container" style="padding:0;max-width:100%;">
+      <div style="padding:50px 30px 20px;text-align:center;">
+        <h2 style="font-family:'Montserrat',sans-serif;font-size:32px;font-weight:800;color:white;text-transform:uppercase;margin-bottom:10px;">Our Solutions</h2>
+        <div class="divider" style="margin:16px auto;"></div>
+      </div>
+      <div class="solutions-grid">
+        <div class="solution-card" onclick="nav('youth-employment')">
+          <div class="icon"><i class="fas fa-user-graduate"></i></div>
+          <h3>Youth Employment Solutions</h3>
+          <p>Offering equitable employment opportunities to all young Australians.</p>
+          <a onclick="nav('youth-employment')">Learn More</a>
+        </div>
+        <div class="solution-card" onclick="nav('it-solutions')">
+          <div class="icon"><i class="fas fa-laptop"></i></div>
+          <h3>IT Solutions</h3>
+          <p>Supporting individuals and NFPs with a range of IT solutions.</p>
+          <a onclick="nav('it-solutions')">Learn More</a>
+        </div>
+        <div class="solution-card" onclick="nav('logistics')">
+          <div class="icon"><i class="fas fa-boxes"></i></div>
+          <h3>Logistics Solutions</h3>
+          <p>Offering a wide range of logistics services to support a circular economy.</p>
+          <a onclick="nav('logistics')">Learn More</a>
+        </div>
+        <div class="solution-card" onclick="nav('tech-solutions')">
+          <div class="icon"><i class="fas fa-tools"></i></div>
+          <h3>Technical Solutions</h3>
+          <p>Providing high-quality technical services for businesses of all sizes.</p>
+          <a onclick="nav('tech-solutions')">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section-navy" style="padding:0;background:#142238;">
+    <div class="container" style="padding:0;max-width:100%;">
+      <div style="padding:30px 30px 10px;text-align:center;">
+        <h2 style="font-family:'Montserrat',sans-serif;font-size:28px;font-weight:800;color:white;text-transform:uppercase;">Our Social Impact Over The Years</h2>
+        <div class="divider" style="margin:14px auto 0;"></div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-label">WE HAVE ASSISTED OVER</div>
+          <div class="stat-number" id="stat1">0</div>
+          <div style="color:var(--orange);font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Young People</div>
+          <div class="stat-desc">To improve their work skills and employment opportunities.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-laptop"></i></div>
+          <div class="stat-label">WE HAVE DISTRIBUTED OVER</div>
+          <div class="stat-number" id="stat2">0</div>
+          <div style="color:var(--orange);font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">TECHNOLOGY PACKS</div>
+          <div class="stat-desc">To individuals and communities that otherwise couldn't afford them.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-recycle"></i></div>
+          <div class="stat-label">WE HAVE DIVERTED</div>
+          <div class="stat-number" id="stat3">0</div>
+          <div style="color:var(--orange);font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">TONNES</div>
+          <div class="stat-desc">Of e-waste<br>From landfill.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="stat-label">WE HAVE PROTECTED OVER</div>
+          <div class="stat-number" id="stat4">0</div>
+          <div style="color:var(--orange);font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">people's data</div>
+          <div class="stat-desc">with our cyber<br>security solutions</div>
+        </div>
+      </div>
+      <div style="text-align:center;padding:30px;">
+        <a class="btn-primary" onclick="nav('social-impact')">Find Out more</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION DETAILS -->
+  <section class="section-light">
+    <div class="container">
+      <div class="solution-detail">
+        <div>
+          <div class="solution-detail-img"><i class="fas fa-user-tie"></i></div>
+        </div>
+        <div>
+          <h2>Youth Employment Solutions</h2>
+          <p>WorkVentures' Youth Employment Solutions provides sustainable employment opportunities for all young Australians.</p>
+          <p>We offer a range of options, including traineeships, career pathway programs, work placement and cyber cadetships.</p>
+          <p>WorkVentures offers bespoke hiring services to host employers and ongoing support for trainees and hosts.</p>
+          <a class="btn-primary" onclick="nav('youth-employment')">find out more</a>
+        </div>
+      </div>
+      <div class="solution-detail reverse">
+        <div>
+          <div class="solution-detail-img"><i class="fas fa-desktop"></i></div>
+        </div>
+        <div>
+          <h2>IT Solutions</h2>
+          <p>WorkVentures' IT Solutions team focuses on closing the digital divide by providing low-cost, high-quality technology to organisations and individuals around Australia.</p>
+          <p>We offer affordable laptops and PCs as well as managed services for NFP organisations. Our programs include digital coaching to enhance technology skills and promote digital inclusion for all people.</p>
+          <a class="btn-primary" onclick="nav('it-solutions')">find out more</a>
+        </div>
+      </div>
+      <div class="solution-detail">
+        <div>
+          <div class="solution-detail-img"><i class="fas fa-truck"></i></div>
+        </div>
+        <div>
+          <h2>Logistics Solutions</h2>
+          <p>WorkVentures' Logistic Solutions team provides a variety of services to meet corporate needs as well as the needs of small businesses. Our mission is to promote a circular economy through our e-waste recycling program.</p>
+          <p>We also offer 3PL solutions, commissioning and decommissioning. At every stage of our services, we ensure safe data destruction and protection of sensitive data.</p>
+          <a class="btn-primary" onclick="nav('logistics')">find out more</a>
+        </div>
+      </div>
+      <div class="solution-detail reverse">
+        <div>
+          <div class="solution-detail-img"><i class="fas fa-wrench"></i></div>
+        </div>
+        <div>
+          <h2>Technical Solutions</h2>
+          <p>WorkVentures' Technical Solutions experts have 30 years of experience in providing proficient technical services, high-quality refurbishment of devices, and staging and imaging.</p>
+          <p>We complete in-house triage, testing, and repairs while securely erasing data. As a locally based repair centre, WorkVentures can offer a streamlined service for all businesses.</p>
+          <a class="btn-primary" onclick="nav('tech-solutions')">find out more</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS GRID -->
+  <section class="section-gray">
+    <div class="container">
+      <div class="section-header">
+        <h2>Learn More about our programs and solutions</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="programs-grid">
+        <div class="program-card" onclick="nav('digital-inclusion')">
+          <div class="program-card-img"><i class="fas fa-wifi"></i></div>
+          <div class="program-card-body">
+            <h4>Digital Inclusion Packages</h4>
+            <p>Technology to Support Your Community. Does your organisation support an underserved community?</p>
+            <a onclick="nav('digital-inclusion')">Read More →</a>
+          </div>
+        </div>
+        <div class="program-card" onclick="nav('affordable-laptops')">
+          <div class="program-card-img"><i class="fas fa-laptop"></i></div>
+          <div class="program-card-body">
+            <h4>Affordable Laptops and PCs</h4>
+            <p>Reliable, Low-Cost Technology. Are you looking to purchase a low-cost, high-quality device?</p>
+            <a onclick="nav('affordable-laptops')">Read More →</a>
+          </div>
+        </div>
+        <div class="program-card" onclick="nav('youth-employment')">
+          <div class="program-card-img"><i class="fas fa-user-graduate"></i></div>
+          <div class="program-card-body">
+            <h4>Youth Employment Solutions</h4>
+            <p>Meaningful Employment Opportunities. At WorkVentures, we are passionate about igniting young people.</p>
+            <a onclick="nav('youth-employment')">Read More →</a>
+          </div>
+        </div>
+        <div class="program-card" onclick="nav('sourcing-trainees')">
+          <div class="program-card-img"><i class="fas fa-search"></i></div>
+          <div class="program-card-body">
+            <h4>Sourcing Trainees</h4>
+            <p>Why You Should Hire a WorkVentures Trainee. Are you looking to hire an entry-level staff member?</p>
+            <a onclick="nav('sourcing-trainees')">Read More →</a>
+          </div>
+        </div>
+        <div class="program-card" onclick="nav('traineeship-program')">
+          <div class="program-card-img"><i class="fas fa-certificate"></i></div>
+          <div class="program-card-body">
+            <h4>Traineeship Program</h4>
+            <p>Starting Your traineeship Journey. Are you looking for your dream traineeship?</p>
+            <a onclick="nav('traineeship-program')">Read More →</a>
+          </div>
+        </div>
+        <div class="program-card" onclick="nav('work-placement')">
+          <div class="program-card-img"><i class="fas fa-briefcase"></i></div>
+          <div class="program-card-body">
+            <h4>Work Placement Program</h4>
+            <p>Real-World Work Experience. Are you looking for a way for your students to gain work experience?</p>
+            <a onclick="nav('work-placement')">Read More →</a>
+          </div>
+        </div>
+        <div class="program-card" onclick="nav('ewaste')">
+          <div class="program-card-img"><i class="fas fa-recycle"></i></div>
+          <div class="program-card-body">
+            <h4>Secure E-Waste Solutions</h4>
+            <p>Secure IT Lifecycle. Are you looking for sustainable and secure e-waste disposal?</p>
+            <a onclick="nav('ewaste')">Read More →</a>
+          </div>
+        </div>
+        <div class="program-card" onclick="nav('tech-services')">
+          <div class="program-card-img"><i class="fas fa-cogs"></i></div>
+          <div class="program-card-body">
+            <h4>Technical Services</h4>
+            <p>Reliable Technical Solutions. Are you looking for reliable and local technical services?</p>
+            <a onclick="nav('tech-services')">Read More →</a>
+          </div>
+        </div>
+        <div class="program-card" onclick="nav('tech-solutions')">
+          <div class="program-card-img"><i class="fas fa-tools"></i></div>
+          <div class="program-card-body">
+            <h4>Technical Solutions</h4>
+            <p>Locally Based Technical Solutions. WorkVentures' Technical Solutions team is committed to delivering excellence.</p>
+            <a onclick="nav('tech-solutions')">Read More →</a>
+          </div>
+        </div>
+        <div class="program-card" onclick="nav('staging')">
+          <div class="program-card-img"><i class="fas fa-server"></i></div>
+          <div class="program-card-body">
+            <h4>Staging</h4>
+            <p>Diverse Staging Solutions for All Businesses. Do you need your devices staged for deployment?</p>
+            <a onclick="nav('staging')">Read More →</a>
+          </div>
+        </div>
+        <div class="program-card" onclick="nav('repairs')">
+          <div class="program-card-img"><i class="fas fa-screwdriver"></i></div>
+          <div class="program-card-body">
+            <h4>Repairs</h4>
+            <p>Back-to-Base Repairs. Are you looking for a local repair centre you can rely on?</p>
+            <a onclick="nav('repairs')">Read More →</a>
+          </div>
+        </div>
+        <div class="program-card" onclick="nav('refurbishment')">
+          <div class="program-card-img"><i class="fas fa-sync"></i></div>
+          <div class="program-card-body">
+            <h4>Refurbishment</h4>
+            <p>Professional Equipment Refurbishment Services. Are you looking to refurbish your old devices?</p>
+            <a onclick="nav('refurbishment')">Read More →</a>
+          </div>
+        </div>
+        <div class="program-card" onclick="nav('cyber-careers')">
+          <div class="program-card-img"><i class="fas fa-shield-alt"></i></div>
+          <div class="program-card-body">
+            <h4>Cyber Security Careers</h4>
+            <p>Explore Your Future in Cyber. Are you interested in kickstarting a career in cyber security?</p>
+            <a onclick="nav('cyber-careers')">Read More →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section-light">
+    <div class="container">
+      <div class="section-header">
+        <h2>What Our Partners Say about us</h2>
+        <div class="divider"></div>
+        <p>Thank you very much for the great partnership we have developed at WorkVentures. We have really valued the support that WorkVentures has given us.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p>We value partnerships with organisations that share similar values and beliefs to ours, and I thank you for your work to build a solid partnership that has resulted in so many of our GO Scholars being supported through affordable technology.</p>
+          <div class="testimonial-author">
+            <div class="avatar">CD</div>
+            <div>
+              <strong>Charlene Davison</strong>
+              <span>GO Foundation - CEO</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>WorkVentures' performance is excellent. They deliver quality, reliable IT solutions. As our needs evolve, I am confident WorkVentures will continue to develop new solutions that work for us.</p>
+          <div class="testimonial-author">
+            <div class="avatar">DH</div>
+            <div>
+              <strong>David Hetherington</strong>
+              <span>Public Education Foundation - Former CEO</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>WorkVentures is one of Westpac's longest partners in the technology space. They have experience and passion and are a trusted partner for device donations and digital inclusion initiatives.</p>
+          <div class="testimonial-author">
+            <div class="avatar">PM</div>
+            <div>
+              <strong>Paul McKenna</strong>
+              <span>Westpac - Head of Digital Workplace & Contact Centre Platforms</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>The Smith Family collaborated with WorkVentures for laptop delivery and technical support to help students access technology. Their efficient processes enabled us to help thousands of students access technology.</p>
+          <div class="testimonial-author">
+            <div class="avatar">DT</div>
+            <div>
+              <strong>Doug Taylor</strong>
+              <span>The Smith Family - CEO</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>KPMG collaborated with WorkVentures for our Laptops for Lifelong Learning campaign to provide 178 high school students with refurbished laptops and technical support. We hope to continue our impactful relationship.</p>
+          <div class="testimonial-author">
+            <div class="avatar">JB</div>
+            <div>
+              <strong>Julia Bain</strong>
+              <span>KPMG Australia - Manager, Corporate Citizenship</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>Anglicare NQ partnered with WorkVentures for our cyber security journey. The process was productive, comprehensive and extremely informative. The affordability of the program takes into account the budget restraints faced by NGOs.</p>
+          <div class="testimonial-author">
+            <div class="avatar">LC</div>
+            <div>
+              <strong>Liz Colahan</strong>
+              <span>Anglicare North Queensland - CEO</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>WorkVentures provides high-quality support to Uniting and trainees. They have a flexible traineeship program for businesses, with a dedicated staff member for easy management. They are a supportive and collaborative community partner.</p>
+          <div class="testimonial-author">
+            <div class="avatar">KL</div>
+            <div>
+              <strong>Kerry Lambert</strong>
+              <span>Uniting - Stakeholder Engagement Manager</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>The WorkVentures team are flexible, professional and have saved us time and money. We appreciate the high quality of candidates and how seamless the recruiting process was.</p>
+          <div class="testimonial-author">
+            <div class="avatar">BL</div>
+            <div>
+              <strong>Bryce Levido</strong>
+              <span>Animal Logic - Support Engineering Supervisor</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>IBM and WorkVentures have had a successful, long-term partnership. They perform complex repairs with ease and handle change efficiently, which is a real testament to their professionalism.</p>
+          <div class="testimonial-author">
+            <div class="avatar">AH</div>
+            <div>
+              <strong>Anthony Herrett</strong>
+              <span>IBM - Delivery Partner Executive</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>WorkVentures vets the applicants very well and we receive high quality candidates. We always recommend WorkVentures to anyone considering hiring a trainee.</p>
+          <div class="testimonial-author">
+            <div class="avatar">MD</div>
+            <div>
+              <strong>Maria Danieli</strong>
+              <span>AD Danieli Chartered Accountants - Practice Manager</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>WorkVentures team was a pleasure to work with, meeting security guidelines and working efficiently on tight deadlines with teams in USA and China. Their professionalism made them a great team to work with!</p>
+          <div class="testimonial-author">
+            <div class="avatar">GJ</div>
+            <div>
+              <strong>Gimantha Jayasinghe</strong>
+              <span>NPD Group (now Circana) - Deputy MD APAC</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>For over a decade, TES has partnered with WorkVentures. Their flexibility in a rapidly growing industry, led with a focus on the customer perspective, has helped us strengthen our customer base.</p>
+          <div class="testimonial-author">
+            <div class="avatar">KM</div>
+            <div>
+              <strong>Khristopher Molina</strong>
+              <span>TES-AMM - Program Manager</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="section-gray">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Partners</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="partners-logos">
+        <div class="partner-logo">The Smith Family</div>
+        <div class="partner-logo">City of Melbourne</div>
+        <div class="partner-logo">Westpac</div>
+        <div class="partner-logo">KPMG</div>
+        <div class="partner-logo">CHG</div>
+        <div class="partner-logo">IBM</div>
+        <div class="partner-logo">Microsoft</div>
+        <div class="partner-logo">nbn</div>
+        <div class="partner-logo">Anglicare</div>
+        <div class="partner-logo">Uniting</div>
+        <div class="partner-logo">Public Education Foundation</div>
+        <div class="partner-logo">GO Foundation</div>
+        <div class="partner-logo">CoAct</div>
+        <div class="partner-logo">ABCN</div>
+        <div class="partner-logo">City of Sydney</div>
+        <div class="partner-logo">Dicker Data</div>
+        <div class="partner-logo">Endeavour Energy</div>
+        <div class="partner-logo">AIFPL</div>
+        <div class="partner-logo">TCL</div>
+        <div class="partner-logo">Bridge Housing</div>
+        <div class="partner-logo">Vinnies</div>
+        <div class="partner-logo">Good Things Foundation</div>
+        <div class="partner-logo">TasNetworks</div>
+        <div class="partner-logo">Salvation Army</div>
+        <div class="partner-logo">BT</div>
+        <div class="partner-logo">Catholic Education Archdiocese of Canberra &amp; Goulburn</div>
+        <div class="partner-logo">CCNB</div>
+        <div class="partner-logo">Ionize</div>
+        <div class="partner-logo">Circana</div>
+        <div class="partner-logo">TES-AMM</div>
+        <div class="partner-logo">Redfern Youth Connect</div>
+        <div class="partner-logo">Five Bridges</div>
+        <div class="partner-logo">River Nile School</div>
+        <div class="partner-logo">RPA Virtual</div>
+        <div class="partner-logo">Telstra</div>
+        <div class="partner-logo">TES-AMM Australia</div>
+        <div class="partner-logo">Women's Housing Company</div>
+        <div class="partner-logo">St. George</div>
+        <div class="partner-logo">TasCOSS</div>
+        <div class="partner-logo">Better Life Mobile</div>
+        <div class="partner-logo">FTA</div>
+        <div class="partner-logo">Job Centre Australia</div>
+        <div class="partner-logo">Animal Logic</div>
+        <div class="partner-logo">Talent Rise</div>
+        <div class="partner-logo">Riedel</div>
+        <div class="partner-logo">Otis</div>
+        <div class="partner-logo">UptimeRobot</div>
+        <div class="partner-logo">Atlassian</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section-navy">
+    <div class="container">
+      <div class="contact-section">
+        <div class="contact-form">
+          <h2 style="color:white;">Contact Us Today</h2>
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" placeholder="Your Name">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="Your Email">
+          </div>
+          <div class="form-group">
+            <label>Number</label>
+            <input type="tel" placeholder="Your Phone Number">
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" placeholder="Subject">
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Your Message"></textarea>
+          </div>
+          <button class="btn-primary">Submit</button>
+        </div>
+        <div>
+          <div class="contact-info-block">
+            <h3>CONNECT WITH US</h3>
+            <div class="contact-item">
+              <div class="ci-icon"><i class="fas fa-phone"></i></div>
+              <div>
+                <strong>Free Call</strong>
+                <p>1800 112 205</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon"><i class="fas fa-globe"></i></div>
+              <div>
+                <strong>ONLINE ENQUIRY</strong>
+                <p>We'll be in touch soon</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <strong>EMAIL US</strong>
+                <p>info@workventures.com.au</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div>
+                <strong>Address</strong>
+                <p>Building 3, Suite 3.01<br>190 Bourke Road<br>ALEXANDRIA NSW 2015</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon"><i class="fas fa-phone-alt"></i></div>
+              <div>
+                <strong>General Enquiries</strong>
+                <p>(02) 8907 3300</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- PAGE: ABOUT -->
+<!-- ========================================================= -->
+<div class="page" id="page-about">
+  <div class="page-hero">
+    <h1>About WorkVentures</h1>
+    <p>Australia's leading IT social enterprise, committed to creating inclusive, vibrant communities since 1979.</p>
+  </div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span> About WorkVentures</div></div>
+  <section class="section-light">
+    <div class="container content-with-sidebar">
+      <div class="content-section">
+        <h2>Empowering Individuals to Create Vibrant Inclusive Communities</h2>
+        <p>WorkVentures was founded way back in 1979 as Peninsula Community Services. Since then, we have undergone many challenges, changes and developments, however, our core objective remains the same: Empowering Individuals to Create Vibrant Inclusive Communities.</p>
+        <p>For those of us lucky enough to be digitally independent, it can be difficult to imagine surviving even one day without the convenience technology affords us. But sadly, not everyone in this country has the same financial means, relevant skills or access to digital technology to be able to feel digitally included.</p>
+        <p>We believe creating access to technology for all and mastering computer literacy within our communities is key to establishing an individual's independence and creating a more socially inclusive community.</p>
+        <h3>Discover how we empower individuals all over Australia</h3>
+        <p>Through our partnerships with other like-minded NFPs and corporates, we push the boundaries to:</p>
+        <ul>
+          <li>Breathe new life into technology with our ability to recycle technology. By refurbishing and selling donated computers, we make technology accessible to those that would otherwise be digitally excluded.</li>
+          <li>Empower individuals by providing alternative employment pathways and assisting in the development of skills for those that would otherwise be left behind.</li>
+          <li>Provide recycled technology and other solutions to assist with reducing the environmental footprint of the organisations we work with.</li>
+        </ul>
+        <p>All profits from our social enterprise are reinvested into our digital inclusion strategies and programs for young people, which aim to empower individuals and create inclusive communities in Australia.</p>
+        <div class="info-box">
+          <h4>Our Mission</h4>
+          <p>WorkVentures is Australia's leading IT social enterprise. We are committed to creating inclusive, vibrant communities. We help young people gain meaningful skills, training, and jobs and provide affordable technology and connectivity to those who are digitally excluded.</p>
+        </div>
+        <a class="btn-primary" onclick="nav('history')">Our History</a>&nbsp;&nbsp;
+        <a class="btn-primary" style="background:var(--dark-navy);" onclick="nav('founder')">Our Founder</a>
+      </div>
+      <div>
+        <div class="sidebar-card">
+          <h4>About Us</h4>
+          <ul>
+            <li><a onclick="nav('about')">About WorkVentures</a></li>
+            <li><a onclick="nav('board')">Our Board</a></li>
+            <li><a onclick="nav('team')">Our Team</a></li>
+            <li><a onclick="nav('history')">Our History</a></li>
+            <li><a onclick="nav('founder')">Our Founder</a></li>
+            <li><a onclick="nav('governance')">Corporate Governance</a></li>
+            <li><a onclick="nav('quality')">Quality &amp; Certification</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h4>Contact Us</h4>
+          <p style="font-size:13px;color:var(--text-mid);margin-bottom:10px;">Free Call: 1800 112 205</p>
+          <p style="font-size:13px;color:var(--text-mid);margin-bottom:10px;">info@workventures.com.au</p>
+          <a class="btn-primary" style="font-size:12px;padding:10px 18px;" onclick="nav('contact')">Get In Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- PAGE: SOCIAL IMPACT -->
+<!-- ========================================================= -->
+<div class="page" id="page-social-impact">
+  <div class="page-hero">
+    <h1>Social Impact</h1>
+    <p>WorkVentures plays a vital role in creating social inclusion in Australia for individuals and their communities.</p>
+  </div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span> Social Impact</div></div>
+  <section class="section-light">
+    <div class="container">
+      <div class="section-header">
+        <p style="font-size:16px;color:var(--text-mid);">Almost one in five young people in Australia are long-term unemployed and the gap between digitally included and excluded Australians is substantial and growing. WorkVentures plays a vital role in creating social inclusion in Australia for individuals and their communities. By measuring the social impact created through our work and programs, we are better equipped to ensure the success of our endeavours and continue to build and improve.</p>
+      </div>
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="icon"><i class="fas fa-users"></i></div>
+          <h3>5,000+</h3>
+          <p>Young people assisted with jobs, traineeships, qualifications and work experience.</p>
+        </div>
+        <div class="impact-card">
+          <div class="icon"><i class="fas fa-laptop"></i></div>
+          <h3>100,000+</h3>
+          <p>Technology packs supplied to individuals and communities that otherwise couldn't afford them.</p>
+        </div>
+        <div class="impact-card">
+          <div class="icon"><i class="fas fa-recycle"></i></div>
+          <h3>2,000+</h3>
+          <p>Tonnes of e-waste diverted from landfill through responsibly recycled e-waste and packaging.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section-gray">
+    <div class="container">
+      <div class="two-col-text">
+        <div class="content-section">
+          <h2>Social Inclusion for Young People</h2>
+          <p>We know that having twenty-first century skills and relevant work experience are the key to ongoing full-time employment for young people.</p>
+          <p>We support young people by providing work experience, traineeships and jobs within our social enterprise and with other like-minded not-for-profit, government and corporate partners.</p>
+          <p>By providing young people with opportunities to gain tangible skills and become job-ready in a safe and nurturing environment, we encourage them to ignite their potential and, as a result, help create vibrant, inclusive communities.</p>
+        </div>
+        <div class="content-section">
+          <h2>Reducing the Digital Divide</h2>
+          <p>The digital divide in Australia is deepening. The key to closing the gap and creating more socially inclusive communities is creating access to affordable, internet connected technology, and enabling people with the skills to use it.</p>
+          <p>We provide affordable, reliable computers to individuals and non-profits who otherwise could not access or afford this technology. Computers are donated by our partners and restored to an as-new condition, giving new life to technology and creating environmentally-sustainable IT solutions.</p>
+          <p>All technology includes personalised support, ensuring people are empowered with the confidence to use technology to its full potential.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- PAGE: CORPORATE GOVERNANCE -->
+<!-- ========================================================= -->
+<div class="page" id="page-governance">
+  <div class="page-hero">
+    <h1>Corporate Governance</h1>
+    <p>WorkVentures is committed to the highest standards of corporate governance and transparency.</p>
+  </div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('about')"> About Us</a><span>›</span> Corporate Governance</div></div>
+  <section class="section-light">
+    <div class="container content-with-sidebar">
+      <div class="content-section">
+        <h2>Corporate Governance</h2>
+        <p>Our financial accounts are independently audited and lodged annually with the Australian Charities and Not-for-Profits Commission (ACNC).</p>
+        <p>Please contact us if you wish to receive a copy of earlier financial statements.</p>
+        <div class="info-box">
+          <h4>Auditor Change Notice</h4>
+          <p>During the second half of 2023, BDO Audit Pty Ltd resigned as auditors of the company and subsequently HLB Mann Judd Assurance (NSW) Pty Ltd were appointed as auditors. For good Corporate Governance purposes, the Board decided to change auditors due to the fact that BDO Audit Pty Ltd had been the auditors of the company for a number of years.</p>
+        </div>
+        <a class="btn-primary" onclick="nav('contact')">Contact Us for Financial Statements</a>
+      </div>
+      <div>
+        <div class="sidebar-card">
+          <h4>About Us</h4>
+          <ul>
+            <li><a onclick="nav('about')">About WorkVentures</a></li>
+            <li><a onclick="nav('board')">Our Board</a></li>
+            <li><a onclick="nav('team')">Our Team</a></li>
+            <li><a onclick="nav('history')">Our History</a></li>
+            <li><a onclick="nav('founder')">Our Founder</a></li>
+            <li><a onclick="nav('governance')">Corporate Governance</a></li>
+            <li><a onclick="nav('quality')">Quality &amp; Certification</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- PAGE: YOUTH EMPLOYMENT -->
+<!-- ========================================================= -->
+<div class="page" id="page-youth-employment">
+  <div class="page-hero">
+    <h1>Youth Employment Solutions</h1>
+    <p>Meaningful Employment Opportunities for All Young Australians</p>
+  </div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span> Youth Employment Solutions</div></div>
+  <section class="section-light">
+    <div class="container content-with-sidebar">
+      <div class="content-section">
+        <h2>Meaningful Employment Opportunities</h2>
+        <p>At WorkVentures, we are passionate about igniting the potential in young Australians. Our Youth Employment Solutions team work hard to ensure no young person is left behind.</p>
+        <p>During our traineeship program, trainees complete a practical qualification while working full-time in paid employment and gaining real-world work experience. We also provide work placement opportunities for high school students and offer cyber career pathway programs.</p>
+        <p>Our mission is to reduce youth unemployment by empowering young people with meaningful skills and jobs.</p>
+        <h3>Youth Unemployment in Australia</h3>
+        <p>Youth unemployment in Australia is twice that of the rest of the population. As a society, it is important that we tackle the crucial issue of how to reduce unemployment across the country.</p>
+        <p>The main reasons young people struggle to find employment include lack of experience, insufficient qualifications, limited networks, and barriers related to social disadvantage.</p>
+        <h3>Our Solution: Combating Youth Unemployment</h3>
+        <p>No matter what industry you are in, hiring a trainee is a great option for recruiting junior staff to fulfil your entry-level business requirements and support a young person in achieving a meaningful career.</p>
+        <p>We source trainees and place them with your organisation. Together we provide a foundational career pathway that suits the trainee and your business. Trainees are a cost-effective staffing solution.</p>
+        <div class="impact-grid" style="grid-template-columns:repeat(3,1fr);margin:30px 0;">
+          <div class="impact-card">
+            <div class="icon"><i class="fas fa-user-check"></i></div>
+            <h3>5,000+</h3>
+            <p>Young people assisted</p>
+          </div>
+          <div class="impact-card">
+            <div class="icon"><i class="fas fa-chart-line"></i></div>
+            <h3>88%</h3>
+            <p>Traineeship completion rate (40% above national average)</p>
+          </div>
+          <div class="impact-card">
+            <div class="icon"><i class="fas fa-school"></i></div>
+            <h3>1,000+</h3>
+            <p>Work placement students supported</p>
+          </div>
+        </div>
+        <p>WorkVentures has partnered with Uniting since 2017 on First Nations traineeship programs and diversity programs. WorkVentures' Youth Employment Solutions team work with Uniting to help people develop their careers and gain practical skills while working toward a qualification.</p>
+        <h3>Frequently Asked Questions</h3>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Who is WorkVentures? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">WorkVentures is a not-for-profit social enterprise. WorkVentures is also an accredited Group Training Organisation (GTO). Our organisation focuses on maximising support for young people and helping other organisations do the same.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">What is a traineeship? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">A traineeship is an entry-level position providing both paid work experience and a relevant qualification to the trainee.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">What is the benefit of a traineeship to the trainee? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">Young people are more likely to find sustained, long-term employment if they have one year of paid work experience related to their field of study. In a traineeship, they are offered both a qualification and experience simultaneously.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">What are the benefits of a WorkVentures traineeship to a trainee? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">WorkVentures offers a tried and tested support model that means you are 40% more likely to complete your traineeship than the national average.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">What are the benefits for a host company? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">Traineeships are a cost-effective way to fill an entry-level position. They help build talent for the future of the business. WorkVentures makes it easy for host employers to help young people find employment.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">What types of roles is a traineeship suitable for? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">Our trainees are employed in a range of roles. These include office administration, legal support, customer service, IT support and helpdesk, HR, community services, and financial services support. If you have an entry-level position you are looking to fill, please reach out, and we will be able to advise if we are able to assist.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">How long do traineeships last? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">Traineeships are typically 12-24 months, depending on the qualification. IT traineeships typically last 24 months, others are generally between 12-18 months.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Do hosts employ the trainees after the traineeship is complete? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">While there is no obligation for ongoing employment, we find that many employers do keep on their trainees for further employment. On average, 88% of trainees are offered ongoing employment with their host employer. WorkVentures works with the host employer on a managed exit plan and provides individual support to the trainee for the next stage of their career and education.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">What is the qualification that a trainee obtains? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">The trainee will complete a Certificate III or IV in one of a number of disciplines during their traineeship. The right course is selected to match the role that is offered.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Who manages the traineeship coursework? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">WorkVentures' service includes coordinating the traineeship coursework, submission, and completion. We work with Australian Government agencies and Registered Training Organisations (RTOs) to ensure qualification requirements are met. RTOs deliver nationally recognised training in the VET sector.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Does the trainee attend TAFE for their studies? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">No, coursework is completed online. Host employers are required to allow trainees three hours per week to complete their coursework. Host employers must provide an appropriate space for the studies to be completed.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Do trainees sit exams? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">No, the assessment is competency-based. In order to pass each unit, the trainee must be able to demonstrate that they have developed relevant skills and knowledge.</div>
+        </div>
+      </div>
+      <div>
+        <div class="sidebar-card">
+          <h4>Youth Employment</h4>
+          <ul>
+            <li><a onclick="nav('youth-employment')">Youth Employment Solutions</a></li>
+            <li><a onclick="nav('sourcing-trainees')">Sourcing Trainees</a></li>
+            <li><a onclick="nav('traineeship-program')">Traineeship Program</a></li>
+            <li><a onclick="nav('cyber-careers')">Cyber Security Careers</a></li>
+            <li><a onclick="nav('work-placement')">Work Placement Program</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h4>Get Started</h4>
+          <p style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Ready to hire a trainee or start your traineeship journey?</p>
+          <a class="btn-primary" style="font-size:12px;padding:10px 18px;" onclick="nav('contact')">Contact Us Today</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- PAGE: IT SOLUTIONS -->
+<!-- ========================================================= -->
+<div class="page" id="page-it-solutions">
+  <div class="page-hero">
+    <h1>IT Solutions</h1>
+    <p>Promoting Digital Inclusion — Supporting individuals and NFPs with a range of IT solutions.</p>
+  </div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span> IT Solutions</div></div>
+  <section class="section-light">
+    <div class="container content-with-sidebar">
+      <div class="content-section">
+        <h2>Promoting Digital Inclusion</h2>
+        <p>At WorkVentures, we are passionate about bridging the digital divide. We strive to ensure that all Australians have equal opportunities to access technology. We support individuals and organisations around the country by providing affordable devices, connectivity and technical support.</p>
+        <p>In our IT Solutions department, we refurbish pre-owned corporate devices and sell them at affordable prices. We also provide six months of warranty and ongoing technical support.</p>
+        <h3>Australians Face Digital Exclusion</h3>
+        <p>With the world becoming increasingly reliant on technology, it is of great importance that all people and organisations are able to access the digital world.</p>
+        <p><strong>1 in 4 Australians are digitally excluded</strong>, which means that they do not have the same opportunities as those with regular access to technology.</p>
+        <p>Organisations that lack digital literacy fall behind. In 2021, <strong>47% of not-for-profits were not satisfied with the way they used technology</strong>.</p>
+        <h3>Our Solution: Bridging the Digital Divide</h3>
+        <p>At WorkVentures, we believe every individual and organisation deserves the chance to have access to the digital world, IT skills, and necessary support to achieve their goals.</p>
+        <p>We collaborate with our corporate partners to enable individuals and not-for-profits to gain access to affordable, reliable IT solutions and ongoing tech support.</p>
+        <p>For over 40 years, WorkVentures has supported communities and organisations with a range of IT Solutions, including:</p>
+        <ul>
+          <li>Bespoke digital inclusion packages tailored to underserved communities.</li>
+          <li>Affordable laptops &amp; PCs with six months of free warranty and ongoing technical support.</li>
+          <li>IT managed services for not-for-profit organisations.</li>
+          <li>Cyber security services for NFP organisations.</li>
+        </ul>
+        <h3>Our Social Impact</h3>
+        <p>Since 2000, we have distributed 100,000 technology packs to individuals and communities that otherwise couldn't afford them, including:</p>
+        <ul>
+          <li>Students</li>
+          <li>People looking for work</li>
+          <li>Aboriginal young people</li>
+          <li>Seniors &amp; people in social housing</li>
+          <li>People with disabilities</li>
+        </ul>
+        <div class="impact-grid" style="grid-template-columns:repeat(3,1fr);margin:30px 0;">
+          <div class="impact-card">
+            <div class="icon"><i class="fas fa-headset"></i></div>
+            <h3>57,469</h3>
+            <p>Tech calls answered</p>
+          </div>
+          <div class="impact-card">
+            <div class="icon"><i class="fas fa-clock"></i></div>
+            <h3>11,800</h3>
+            <p>Hours spent on support calls &amp; messages</p>
+          </div>
+          <div class="impact-card">
+            <div class="icon"><i class="fas fa-envelope-open"></i></div>
+            <h3>25,492</h3>
+            <p>Support emails addressed</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sidebar-card">
+          <h4>IT Solutions</h4>
+          <ul>
+            <li><a onclick="nav('it-solutions')">IT Solutions</a></li>
+            <li><a onclick="nav('affordable-laptops')">Affordable Laptops and PCs</a></li>
+            <li><a onclick="nav('digital-inclusion')">Digital Inclusion Packages</a></li>
+            <li><a onclick="nav('cyber-security')">Cyber Security Services</a></li>
+            <li><a onclick="nav('national-device-bank')">National Device Bank</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h4>Shop Now</h4>
+          <p style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Browse affordable refurbished laptops and PCs in our online shop.</p>
+          <a class="btn-primary" style="font-size:12px;padding:10px 18px;" href="https://shop.workventures.com.au" target="_blank">Visit Shop</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- PAGE: LOGISTICS -->
+<!-- ========================================================= -->
+<div class="page" id="page-logistics">
+  <div class="page-hero">
+    <h1>Logistics Solutions</h1>
+    <p>Offering a wide range of logistics services to support a circular economy.</p>
+  </div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span> Logistics Solutions</div></div>
+  <section class="section-light">
+    <div class="container content-with-sidebar">
+      <div class="content-section">
+        <h2>Logistics Solutions</h2>
+        <p>WorkVentures' Logistic Solutions team provides a variety of services to meet corporate needs as well as the needs of small businesses. Our mission is to promote a circular economy through our e-waste recycling program.</p>
+        <p>We also offer 3PL solutions, commissioning and decommissioning. At every stage of our services, we ensure safe data destruction and protection of sensitive data.</p>
+        <div class="programs-grid" style="grid-template-columns:repeat(2,1fr);margin:30px 0;">
+          <div class="program-card" onclick="nav('circularit')">
+            <div class="program-card-img"><i class="fas fa-sync-alt"></i></div>
+            <div class="program-card-body">
+              <h4>WorkVentures Circular IT</h4>
+              <p>Reimagining IT asset disposition for maximum social and environmental impact.</p>
+              <a onclick="nav('circularit')">Read More →</a>
+            </div>
+          </div>
+          <div class="program-card" onclick="nav('3pl')">
+            <div class="program-card-img"><i class="fas fa-warehouse"></i></div>
+            <div class="program-card-body">
+              <h4>3PL Services</h4>
+              <p>Third-party logistics solutions tailored to your business needs.</p>
+              <a onclick="nav('3pl')">Read More →</a>
+            </div>
+          </div>
+          <div class="program-card" onclick="nav('ewaste')">
+            <div class="program-card-img"><i class="fas fa-recycle"></i></div>
+            <div class="program-card-body">
+              <h4>Secure E-Waste Solutions</h4>
+              <p>Sustainable and secure disposal of end-of-life IT equipment.</p>
+              <a onclick="nav('ewaste')">Read More →</a>
+            </div>
+          </div>
+          <div class="program-card" onclick="nav('commissioning')">
+            <div class="program-card-img"><i class="fas fa-cog"></i></div>
+            <div class="program-card-body">
+              <h4>Commissioning Solutions</h4>
+              <p>Professional commissioning services for new device deployments.</p>
+              <a onclick="nav('commissioning')">Read More →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sidebar-card">
+          <h4>Logistics Solutions</h4>
+          <ul>
+            <li><a onclick="nav('logistics')">Logistics Solutions</a></li>
+            <li><a onclick="nav('circularit')">WorkVentures Circular IT</a></li>
+            <li><a onclick="nav('3pl')">3PL Services</a></li>
+            <li><a onclick="nav('ewaste')">Secure E-Waste Solutions</a></li>
+            <li><a onclick="nav('commissioning')">Commissioning Solutions</a></li>
+            <li><a onclick="nav('decommissioning')">Decommissioning Solutions</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- PAGE: TECH SOLUTIONS -->
+<!-- ========================================================= -->
+<div class="page" id="page-tech-solutions">
+  <div class="page-hero">
+    <h1>Technical Solutions</h1>
+    <p>Providing high-quality technical services for businesses of all sizes.</p>
+  </div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span> Technical Solutions</div></div>
+  <section class="section-light">
+    <div class="container content-with-sidebar">
+      <div class="content-section">
+        <h2>Locally Based Technical Solutions</h2>
+        <p>WorkVentures' Technical Solutions team is committed to providing high-quality, locally based technical services. With 30 years of experience in the industry, our team has a deep understanding of the needs of businesses of all sizes.</p>
+        <p>We complete in-house triage, testing, and repairs while securely erasing data. As a locally based repair centre, WorkVentures can offer a streamlined service for all businesses.</p>
+        <div class="programs-grid" style="grid-template-columns:repeat(2,1fr);margin:30px 0;">
+          <div class="program-card" onclick="nav('repairs')">
+            <div class="program-card-img"><i class="fas fa-tools"></i></div>
+            <div class="program-card-body">
+              <h4>Repairs</h4>
+              <p>Back-to-base repair services for all types of devices.</p>
+              <a onclick="nav('repairs')">Read More →</a>
+            </div>
+          </div>
+          <div class="program-card" onclick="nav('staging')">
+            <div class="program-card-img"><i class="fas fa-server"></i></div>
+            <div class="program-card-body">
+              <h4>Staging</h4>
+              <p>Professional staging and imaging solutions for device deployments.</p>
+              <a onclick="nav('staging')">Read More →</a>
+            </div>
+          </div>
+          <div class="program-card" onclick="nav('refurbishment')">
+            <div class="program-card-img"><i class="fas fa-sync"></i></div>
+            <div class="program-card-body">
+              <h4>Refurbishment</h4>
+              <p>High-quality device refurbishment to extend device life.</p>
+              <a onclick="nav('refurbishment')">Read More →</a>
+            </div>
+          </div>
+          <div class="program-card" onclick="nav('tech-services')">
+            <div class="program-card-img"><i class="fas fa-cogs"></i></div>
+            <div class="program-card-body">
+              <h4>Technical Services</h4>
+              <p>A broad range of technical services for your business needs.</p>
+              <a onclick="nav('tech-services')">Read More →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sidebar-card">
+          <h4>Technical Solutions</h4>
+          <ul>
+            <li><a onclick="nav('tech-solutions')">Technical Solutions</a></li>
+            <li><a onclick="nav('repairs')">Repairs</a></li>
+            <li><a onclick="nav('staging')">Staging</a></li>
+            <li><a onclick="nav('refurbishment')">Refurbishment</a></li>
+            <li><a onclick="nav('tech-services')">Technical Services</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- PAGE: HISTORY -->
+<!-- ========================================================= -->
+<div class="page" id="page-history">
+  <div class="page-hero">
+    <h1>Our History</h1>
+    <p>Take a stroll through our history and find out how we've developed over the years.</p>
+  </div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('about')"> About Us</a><span>›</span> Our History</div></div>
+  <section class="section-light">
+    <div class="container">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="year">1979</div>
+          <h4>Founded as Peninsula Community Services</h4>
+          <p>WorkVentures was founded in the Malabar/La Perouse area in Sydney's south-east. The organisation initially ran a range of programs including holiday programs, a recycling venture, and other community-based projects.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">1984</div>
+          <h4>Focus Shifts to Employment &amp; Training</h4>
+          <p>From 1984 onwards the focus shifted to employment, training, and technical services — the core of what WorkVentures continues to do today.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2002</div>
+          <h4>Co-founder of Social Ventures Australia</h4>
+          <p>WorkVentures was one of the four organisations that established Social Ventures Australia, a landmark moment in Australian social enterprise history.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2005</div>
+          <h4>Prime Minister's Award for Excellence</h4>
+          <p>WorkVentures and Microsoft Australia won the Prime Minister's Award for Excellence in Community Business Partnership, Longevity category for their 19-year partnership.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2008</div>
+          <h4>Traineeship Program Launched</h4>
+          <p>WorkVentures launched its dedicated traineeship program, focused on inclusion and serving all young Australians — including First Nations youth, people with disabilities, and other underrepresented groups.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2010</div>
+          <h4>Founder Honoured with Order of Australia</h4>
+          <p>Former CEO and Founder Steve Lawrence was appointed an Officer of the Order of Australia (AO) in the 2010 Australia Day Honours list for his service to the community through the development and implementation of not-for-profit ventures to create social change.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2017</div>
+          <h4>Partnership with Uniting</h4>
+          <p>WorkVentures partnered with Uniting on First Nations traineeship programs and diversity programs, helping people develop their careers and gain practical skills while working toward a qualification.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2023</div>
+          <h4>HLB Mann Judd Appointed as Auditors</h4>
+          <p>Following the resignation of BDO Audit Pty Ltd, HLB Mann Judd Assurance (NSW) Pty Ltd were appointed as auditors, demonstrating WorkVentures' commitment to strong corporate governance.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">Today</div>
+          <h4>Australia's Leading IT Social Enterprise</h4>
+          <p>For more than 43 years, WorkVentures has been committed to empowering organisations and individuals through technology, having distributed over 100,000 technology packs and assisted over 5,000 young people.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- PAGE: FOUNDER -->
+<!-- ========================================================= -->
+<div class="page" id="page-founder">
+  <div class="page-hero">
+    <h1>Our Founder</h1>
+    <p>Steve Lawrence (1952–2012) — Visionary, Leader, Community Champion</p>
+  </div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('about')"> About Us</a><span>›</span> Our Founder</div></div>
+  <section class="section-light">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <span class="eyebrow">Steve Lawrence</span>
+          <h2>Our Founder</h2>
+          <blockquote style="border-left:4px solid var(--orange);padding:16px 20px;background:var(--light-gray);margin:20px 0;font-style:italic;font-size:16px;line-height:1.8;color:var(--text-mid);">
+            "The aim of WorkVentures (…) has been to enable communities and individuals to create a future for themselves and to find the kind of jobs that give them meaning and purpose in their lives."
+          </blockquote>
+          <p style="color:var(--text-mid);font-weight:600;">— STEVE LAWRENCE (1952–2012), Founder of WorkVentures</p>
+          <p style="color:var(--text-mid);margin-top:16px;">Steve Lawrence founded WorkVentures in 1979 as Peninsula Community Services. Under his visionary leadership, the organisation grew from a small community initiative into Australia's leading IT social enterprise, impacting tens of thousands of lives.</p>
+          <p style="color:var(--text-mid);">In 2010, Steve was appointed an Officer of the Order of Australia (AO) in the Australia Day Honours list for his service to the community through leadership roles in the development and implementation of not-for-profit ventures to create social change, particularly for youth and the long-term unemployed.</p>
+          <p style="color:var(--text-mid);">Steve's legacy lives on through WorkVentures' continued mission to empower individuals and create vibrant, inclusive communities across Australia.</p>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;">
+          <div style="width:280px;height:320px;background:var(--dark-navy);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:100px;color:var(--orange);flex-direction:column;gap:10px;">
+            <i class="fas fa-user"></i>
+            <span style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:white;letter-spacing:1px;">STEVE LAWRENCE</span>
+            <span style="font-size:12px;color:rgba(255,255,255,0.6);">1952 – 2012</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- PAGE: BOARD -->
+<!-- ========================================================= -->
+<div class="page" id="page-board">
+  <div class="page-hero">
+    <h1>Our Board</h1>
+    <p>WorkVentures is governed by a skilled and experienced Board of Directors.</p>
+  </div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('about')"> About Us</a><span>›</span> Our Board</div></div>
+  <section class="section-light">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Board</h2>
+        <div class="divider"></div>
+        <p>WorkVentures is governed by a skilled and diverse Board of Directors who bring a wealth of experience from across the corporate, government, and not-for-profit sectors.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar"><i class="fas fa-user-tie"></i></div>
+          <div class="team-card-body">
+            <h4>Board Chair</h4>
+            <span>Board of Directors</span>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><i class="fas fa-user-tie"></i></div>
+          <div class="team-card-body">
+            <h4>Jodette Cleary</h4>
+            <span>Board Member — Chief People &amp; Culture Officer, hipages</span>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><i class="fas fa-user-tie"></i></div>
+          <div class="team-card-body">
+            <h4>Board Member</h4>
+            <span>Board of Directors</span>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><i class="fas fa-user-tie"></i></div>
+          <div class="team-card-body">
+            <h4>Board Member</h4>
+            <span>Board of Directors</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- PAGE: TEAM -->
+<!-- ========================================================= -->
+<div class="page" id="page-team">
+  <div class="page-hero">
+    <h1>Our Team</h1>
+    <p>Meet the passionate team behind WorkVentures' mission to create social inclusion through technology.</p>
+  </div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('about')"> About Us</a><span>›</span> Our Team</div></div>
+  <section class="section-light">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Team</h2>
+        <div class="divider"></div>
+        <p>Our dedicated team of professionals work tirelessly to fulfil WorkVentures' mission of empowering individuals and creating vibrant, inclusive communities.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar"><i class="fas fa-user"></i></div>
+          <div class="team-card-body">
+            <h4>Chief Executive Officer</h4>
+            <span>Executive Team</span>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><i class="fas fa-user"></i></div>
+          <div class="team-card-body">
+            <h4>Chief Operations Officer</h4>
+            <span>Executive Team</span>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><i class="fas fa-user"></i></div>
+          <div class="team-card-body">
+            <h4>Head of IT Solutions</h4>
+            <span>IT Solutions</span>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><i class="fas fa-user"></i></div>
+          <div class="team-card-body">
+            <h4>Head of Youth Employment</h4>
+            <span>Youth Employment Solutions</span>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><i class="fas fa-user"></i></div>
+          <div class="team-card-body">
+            <h4>Head of Logistics</h4>
+            <span>Logistics Solutions</span>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><i class="fas fa-user"></i></div>
+          <div class="team-card-body">
+            <h4>Head of Technical Solutions</h4>
+            <span>Technical Solutions</span>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><i class="fas fa-user"></i></div>
+          <div class="team-card-body">
+            <h4>Marketing Manager</h4>
+            <span>Marketing &amp; Communications</span>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><i class="fas fa-user"></i></div>
+          <div class="team-card-body">
+            <h4>Finance Manager</h4>
+            <span>Finance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- PAGE: QUALITY & CERTIFICATION -->
+<!-- ========================================================= -->
+<div class="page" id="page-quality">
+  <div class="page-hero">
+    <h1>Quality &amp; Certification</h1>
+    <p>WorkVentures is committed to the highest standards of quality, compliance, and certification.</p>
+  </div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('about')"> About Us</a><span>›</span> Quality &amp; Certification</div></div>
+  <section class="section-light">
+    <div class="container content-with-sidebar">
+      <div class="content-section">
+        <h2>Quality &amp; Certification</h2>
+        <p>WorkVentures maintains a range of certifications and accreditations that demonstrate our commitment to quality, compliance, and best practice across all areas of our operations.</p>
+        <div class="impact-grid" style="grid-template-columns:repeat(2,1fr);margin:30px 0;">
+          <div class="impact-card">
+            <div class="icon"><i class="fas fa-certificate"></i></div>
+            <h3 style="font-size:20px;">ISO Certified</h3>
+            <p>Internationally recognised quality management standards.</p>
+          </div>
+          <div class="impact-card">
+            <div class="icon"><i class="fas fa-shield-alt"></i></div>
+            <h3 style="font-size:20px;">ACNC Registered</h3>
+            <p>Registered with the Australian Charities and Not-for-profits Commission.</p>
+          </div>
+          <div class="impact-card">
+            <div class="icon"><i class="fas fa-award"></i></div>
+            <h3 style="font-size:20px;">Microsoft Registered Refurbisher</h3>
+            <p>Authorised to install licensed Microsoft software on refurbished PCs.</p>
+          </div>
+          <div class="impact-card">
+            <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3 style="font-size:20px;">Accredited GTO</h3>
+            <p>Accredited Group Training Organisation for traineeship programs.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sidebar-card">
+          <h4>About Us</h4>
+          <ul>
+            <li><a onclick="nav('about')">About WorkVentures</a></li>
+            <li><a onclick="nav('board')">Our Board</a></li>
+            <li><a onclick="nav('governance')">Corporate Governance</a></li>
+            <li><a onclick="nav('quality')">Quality &amp; Certification</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- PAGE: CIRCULARIT -->
+<!-- ========================================================= -->
+<div class="page" id="page-circularit">
+  <div class="page-hero">
+    <h1>WorkVentures Circular IT</h1>
+    <p>Reimagining IT Asset Disposition for Maximum Social and Environmental Impact</p>
+  </div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('logistics')"> Logistics Solutions</a><span>›</span> Circular IT</div></div>
+  <section class="section-light">
+    <div class="container content-with-sidebar">
+      <div class="content-section">
+        <h2>WorkVentures Circular IT (ITAD)</h2>
+        <p>WorkVentures is the only ITAD in Australia whose profits are 100% dedicated to social impact.</p>
+        <p>At WorkVentures, we believe IT asset disposition (ITAD) should do more than clear out old equipment — it should create measurable value, protect your data, and contribute to a more sustainable and inclusive future. Through WorkVentures CircularIT, we transform end-of-life technology into opportunity: securing sensitive information, reducing e-waste, recovering financial value, and delivering tangible social impact.</p>
+        <h3>Data Security</h3>
+        <p>Protecting sensitive information is critical. WorkVentures CircularIT services ensure that all data-bearing devices are wiped or destroyed to the highest industry standards, safeguarding your business, your customers, and your reputation. Every process is fully documented with certificates of data destruction and audit-ready reporting.</p>
+        <h3>Hassle-Free ITAD</h3>
+        <p>Managing used equipment can drain valuable IT resources. As your trusted for-purpose ITAD partner, WorkVentures CircularIT handles everything, from logistics and asset tracking to compliance and reporting, so your team can focus on what matters most: running your business.</p>
+        <h3>Social Impact</h3>
+        <p>Organisations seeking to do good choose ITAD programs that do more than protect data and the environment: they create positive social impact and contribute to your ESG outcomes. Donated or refurbished devices can empower communities, support digital inclusion, and strengthen your organisation's social responsibility profile.</p>
+        <div class="info-box">
+          <h4>How We Create Impact</h4>
+          <p>Redirect residual value by donating devices to trusted NFPs and inclusion partners. As a co-founder of the National Device Bank, WorkVentures ensures every donation is backed by rigorous impact and sustainability reporting, so you can see the difference your contribution makes for both communities and the environment.</p>
+        </div>
+      </div>
+      <div>
+        <div class="sidebar-card">
+          <h4>Logistics Solutions</h4>
+          <ul>
+            <li><a onclick="nav('circularit')">WorkVentures Circular IT</a></li>
+            <li><a onclick="nav('3pl')">3PL Services</a></li>
+            <li><a onclick="nav('ewaste')">Secure E-Waste Solutions</a></li>
+            <li><a onclick="nav('commissioning')">Commissioning Solutions</a></li>
+            <li><a onclick="nav('decommissioning')">Decommissioning Solutions</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- PAGE: NATIONAL DEVICE BANK -->
+<!-- ========================================================= -->
+<div class="page" id="page-national-device-bank">
+  <div class="page-hero">
+    <h1>National Device Bank</h1>
+    <p>Bridging the Digital Divide One Device at a Time</p>
+  </div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('it-solutions')"> IT Solutions</a><span>›</span> National Device Bank</div></div>
+  <section class="section-light">
+    <div class="container content-with-sidebar">
+      <div class="content-section">
+        <h2>National Device Bank</h2>
+        <p>The National Device Bank is a co-founded initiative between WorkVentures, Good360 Australia, and Good Things Australia. Together, we combine decades of expertise to drive digital inclusion and support communities.</p>
+        <p>WorkVentures has delivered over 100,000 devices to underserved Australians. Good360 connects donors with over 4,500 charities to support those in need.</p>
+        <h3>How It Works</h3>
+        <ul>
+          <li>One device commercially remarketed to fund the program</li>
+          <li>One device refurbished and donated via the National Device Bank</li>
+          <li>Windows image applied with core base software requirements</li>
+          <li>Recipient/charity identified, and device delivered with supporting digital support documents</li>
+          <li>Ongoing support, digital literacy education, and connectivity provided to recipients</li>
+        </ul>
+        <p>WorkVentures can provide certified data erasure and device sanitisation services in the absence of an existing arrangement.</p>
+        <div class="info-box">
+          <h4>The Digital Divide</h4>
+          <p>The ramifications of digital exclusion are far-reaching. The National Device Bank addresses this challenge by ensuring every donated device creates real, measurable change in the lives of Australians who need it most.</p>
+        </div>
+      </div>
+      <div>
+        <div class="sidebar-card">
+          <h4>IT Solutions</h4>
+          <ul>
+            <li><a onclick="nav('it-solutions')">IT Solutions</a></li>
+            <li><a onclick="nav('affordable-laptops')">Affordable Laptops and PCs</a></li>
+            <li><a onclick="nav('digital-inclusion')">Digital Inclusion Packages</a></li>
+            <li><a onclick="nav('national-device-bank')">National Device Bank</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- GENERIC INNER PAGES (Simple) -->
+<!-- ========================================================= -->
+<div class="page" id="page-affordable-laptops">
+  <div class="page-hero"><h1>Affordable Laptops and PCs</h1><p>Reliable, Low-Cost Technology for everyone.</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('it-solutions')"> IT Solutions</a><span>›</span> Affordable Laptops and PCs</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Reliable, Low-Cost Technology</h2>
+      <p>Are you looking to purchase a low-cost, high-quality laptop or PC? WorkVentures' affordable range of refurbished laptops and PCs is the perfect solution.</p>
+      <p>All devices are fully refurbished, tested, and come with six months of warranty and ongoing technical support. We offer a range of Windows devices at significantly reduced prices, making technology accessible to individuals and not-for-profits who would otherwise be unable to afford it.</p>
+      <p>Our team of technical experts carefully test and restore each device to an as-new condition, ensuring you receive a reliable product at a fraction of the cost of a new device.</p>
+      <a class="btn-primary" href="https://shop.workventures.com.au" target="_blank">Visit Our Shop</a>
+    </div>
+    <div><div class="sidebar-card"><h4>IT Solutions</h4><ul><li><a onclick="nav('it-solutions')">IT Solutions</a></li><li><a onclick="nav('affordable-laptops')">Affordable Laptops and PCs</a></li><li><a onclick="nav('digital-inclusion')">Digital Inclusion Packages</a></li><li><a onclick="nav('cyber-security')">Cyber Security Services</a></li><li><a onclick="nav('national-device-bank')">National Device Bank</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<div class="page" id="page-digital-inclusion">
+  <div class="page-hero"><h1>Digital Inclusion Packages</h1><p>Technology to Support Your Community</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('it-solutions')"> IT Solutions</a><span>›</span> Digital Inclusion Packages</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Technology to Support Your Community</h2>
+      <p>Does your organisation support an underserved community? WorkVentures' Digital Inclusion Packages are designed to provide affordable, comprehensive technology solutions tailored to the needs of not-for-profit organisations and community groups.</p>
+      <p>Our packages include refurbished devices, internet connectivity solutions, digital coaching, and ongoing technical support. We work with your organisation to design a bespoke package that meets your unique needs and budget.</p>
+      <p>Digital inclusion is at the heart of everything we do. We believe that access to technology and the skills to use it are essential for full participation in modern society.</p>
+      <a class="btn-primary" onclick="nav('contact')">Enquire Now</a>
+    </div>
+    <div><div class="sidebar-card"><h4>IT Solutions</h4><ul><li><a onclick="nav('it-solutions')">IT Solutions</a></li><li><a onclick="nav('affordable-laptops')">Affordable Laptops and PCs</a></li><li><a onclick="nav('digital-inclusion')">Digital Inclusion Packages</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<div class="page" id="page-cyber-security">
+  <div class="page-hero"><h1>Cyber Security Services</h1><p>Protecting NFP Organisations in the Digital World</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('it-solutions')"> IT Solutions</a><span>›</span> Cyber Security Services</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Cyber Security Services for NFPs</h2>
+      <p>WorkVentures' cyber security experts can assist with strengthening an organisation's security posture and provide a bespoke cyber security management plan.</p>
+      <p>We understand that not-for-profit organisations face unique challenges when it comes to cyber security — limited budgets, lack of internal expertise, and increasing threats. Our services are tailored specifically to the needs and budgets of NFP organisations.</p>
+      <p>Our services include: vulnerability assessments, security audits, staff training, incident response planning, and ongoing managed security services.</p>
+      <a class="btn-primary" onclick="nav('contact')">Book a Free Consultation</a>
+    </div>
+    <div><div class="sidebar-card"><h4>IT Solutions</h4><ul><li><a onclick="nav('it-solutions')">IT Solutions</a></li><li><a onclick="nav('cyber-security')">Cyber Security Services</a></li><li><a onclick="nav('cyber-careers')">Cyber Security Careers</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<div class="page" id="page-sourcing-trainees">
+  <div class="page-hero"><h1>Sourcing Trainees</h1><p>Why You Should Hire a WorkVentures Trainee</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('youth-employment')"> Youth Employment Solutions</a><span>›</span> Sourcing Trainees</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Why You Should Hire a WorkVentures Trainee</h2>
+      <p>Are you looking to hire an entry-level staff member? WorkVentures' traineeship program provides a cost-effective, impactful way to grow your team while making a meaningful difference to a young person's life.</p>
+      <p>WorkVentures handles the entire recruitment process — from sourcing and screening candidates to managing the traineeship administration and coursework. All you need to do is provide the workplace and mentorship.</p>
+      <ul>
+        <li>Access to a pool of motivated, vetted candidates</li>
+        <li>Full recruitment and HR support from WorkVentures</li>
+        <li>Government incentives and wage subsidies may apply</li>
+        <li>Demonstrate your commitment to social impact and ESG goals</li>
+        <li>88% of trainees offered ongoing employment after completion</li>
+      </ul>
+      <a class="btn-primary" onclick="nav('contact')">Hire a Trainee Today</a>
+    </div>
+    <div><div class="sidebar-card"><h4>Youth Employment</h4><ul><li><a onclick="nav('youth-employment')">Youth Employment Solutions</a></li><li><a onclick="nav('sourcing-trainees')">Sourcing Trainees</a></li><li><a onclick="nav('traineeship-program')">Traineeship Program</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<div class="page" id="page-traineeship-program">
+  <div class="page-hero"><h1>Traineeship Program</h1><p>Starting Your Traineeship Journey</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('youth-employment')"> Youth Employment Solutions</a><span>›</span> Traineeship Program</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Starting Your Traineeship Journey</h2>
+      <p>Are you looking for your dream traineeship? WorkVentures' traineeship program is your pathway to a meaningful career. Our program provides both paid work experience and a nationally recognised qualification simultaneously.</p>
+      <p>As a WorkVentures trainee, you will be placed with a host employer in a role suited to your interests and career goals. You will complete a Certificate III or IV qualification while working full-time in paid employment.</p>
+      <p>WorkVentures offers a tried and tested support model that means you are 40% more likely to complete your traineeship than the national average.</p>
+      <p>Our trainees work in a range of industries including office administration, legal support, customer service, IT support and helpdesk, HR, community services, and financial services.</p>
+      <a class="btn-primary" onclick="nav('contact')">Apply Now</a>
+    </div>
+    <div><div class="sidebar-card"><h4>Youth Employment</h4><ul><li><a onclick="nav('youth-employment')">Youth Employment Solutions</a></li><li><a onclick="nav('traineeship-program')">Traineeship Program</a></li><li><a onclick="nav('work-placement')">Work Placement Program</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<div class="page" id="page-cyber-careers">
+  <div class="page-hero"><h1>Cyber Security Careers</h1><p>Explore Your Future in Cyber</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('youth-employment')"> Youth Employment Solutions</a><span>›</span> Cyber Security Careers</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Explore Your Future in Cyber</h2>
+      <p>Are you interested in kickstarting a career in cyber security? WorkVentures' Cyber Security Careers program provides young people with the skills, training, and practical experience needed to enter the rapidly growing cyber security industry.</p>
+      <p>Through our cyber cadetship program, participants gain hands-on experience working alongside experienced cyber security professionals, while completing relevant industry certifications.</p>
+      <p>Cyber security is one of the fastest-growing industries in Australia, with a significant talent shortage. A career in cyber offers excellent long-term prospects and competitive salaries.</p>
+      <a class="btn-primary" onclick="nav('contact')">Find Out More</a>
+    </div>
+    <div><div class="sidebar-card"><h4>Youth Employment</h4><ul><li><a onclick="nav('youth-employment')">Youth Employment Solutions</a></li><li><a onclick="nav('cyber-careers')">Cyber Security Careers</a></li><li><a onclick="nav('cyber-security')">Cyber Security Services</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<div class="page" id="page-work-placement">
+  <div class="page-hero"><h1>Work Placement Program</h1><p>Real-World Work Experience for Students</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('youth-employment')"> Youth Employment Solutions</a><span>›</span> Work Placement Program</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Real-World Work Experience</h2>
+      <p>Are you looking for a way for your students to gain real-world work experience? WorkVentures' Work Placement Program connects high school and VET students with meaningful work experience placements in a professional environment.</p>
+      <p>Students gain exposure to real workplace practices, develop professional skills, and build their confidence and networks — all while contributing productively to the host organisation.</p>
+      <p>WorkVentures coordinates the entire placement process, including managing all legal requirements, student supervision frameworks, and feedback reporting.</p>
+      <a class="btn-primary" onclick="nav('contact')">Get Involved</a>
+    </div>
+    <div><div class="sidebar-card"><h4>Youth Employment</h4><ul><li><a onclick="nav('youth-employment')">Youth Employment Solutions</a></li><li><a onclick="nav('work-placement')">Work Placement Program</a></li><li><a onclick="nav('traineeship-program')">Traineeship Program</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<div class="page" id="page-ewaste">
+  <div class="page-hero"><h1>Secure E-Waste Solutions</h1><p>Secure IT Lifecycle Management</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('logistics')"> Logistics Solutions</a><span>›</span> Secure E-Waste Solutions</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Secure IT Lifecycle</h2>
+      <p>Are you looking for sustainable and secure e-waste disposal? WorkVentures' Secure E-Waste Solutions provide a comprehensive, compliant, and responsible approach to end-of-life IT equipment management.</p>
+      <p>We handle everything from collection and transportation to data destruction, device processing, and environmental disposal. Every step is fully documented and auditable.</p>
+      <p>By choosing WorkVentures for your e-waste management, you are also contributing to our social impact programs — helping to fund digital inclusion initiatives and youth employment programs across Australia.</p>
+      <a class="btn-primary" onclick="nav('contact')">Get a Quote</a>
+    </div>
+    <div><div class="sidebar-card"><h4>Logistics Solutions</h4><ul><li><a onclick="nav('logistics')">Logistics Solutions</a></li><li><a onclick="nav('ewaste')">Secure E-Waste Solutions</a></li><li><a onclick="nav('circularit')">WorkVentures Circular IT</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<div class="page" id="page-3pl">
+  <div class="page-hero"><h1>3PL Services</h1><p>Third-Party Logistics Solutions for Your Business</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('logistics')"> Logistics Solutions</a><span>›</span> 3PL Services</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Third-Party Logistics Solutions</h2>
+      <p>WorkVentures' 3PL (Third-Party Logistics) services provide flexible, scalable warehousing and logistics solutions for businesses of all sizes. We offer pick and pack, storage, inventory management, and fulfilment services.</p>
+      <p>Our Alexandria-based facility is equipped to handle a wide range of products and volumes. By choosing WorkVentures, you benefit from professional logistics services while contributing to our social mission.</p>
+      <a class="btn-primary" onclick="nav('contact')">Enquire Now</a>
+    </div>
+    <div><div class="sidebar-card"><h4>Logistics Solutions</h4><ul><li><a onclick="nav('logistics')">Logistics Solutions</a></li><li><a onclick="nav('3pl')">3PL Services</a></li><li><a onclick="nav('ewaste')">Secure E-Waste Solutions</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<div class="page" id="page-commissioning">
+  <div class="page-hero"><h1>Commissioning Solutions</h1><p>Professional Device Commissioning Services</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('logistics')"> Logistics Solutions</a><span>›</span> Commissioning Solutions</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Commissioning Solutions</h2>
+      <p>WorkVentures provides professional commissioning services for new device deployments. Our team handles the complete commissioning process, from imaging and configuration to quality assurance and delivery.</p>
+      <p>We work with organisations of all sizes to ensure their new devices are ready to use from day one, configured to your exact specifications and security requirements.</p>
+      <a class="btn-primary" onclick="nav('contact')">Get Started</a>
+    </div>
+    <div><div class="sidebar-card"><h4>Logistics Solutions</h4><ul><li><a onclick="nav('logistics')">Logistics Solutions</a></li><li><a onclick="nav('commissioning')">Commissioning Solutions</a></li><li><a onclick="nav('decommissioning')">Decommissioning Solutions</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<div class="page" id="page-decommissioning">
+  <div class="page-hero"><h1>Decommissioning Solutions</h1><p>Secure and Responsible Device Decommissioning</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('logistics')"> Logistics Solutions</a><span>›</span> Decommissioning Solutions</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Decommissioning Solutions</h2>
+      <p>WorkVentures' decommissioning solutions provide a secure, compliant, and environmentally responsible approach to retiring your IT assets. We handle the full decommissioning process including asset tagging, collection, data destruction, and reporting.</p>
+      <p>All decommissioning activities are fully documented with audit-ready reports and certificates of data destruction.</p>
+      <a class="btn-primary" onclick="nav('contact')">Get a Quote</a>
+    </div>
+    <div><div class="sidebar-card"><h4>Logistics Solutions</h4><ul><li><a onclick="nav('logistics')">Logistics Solutions</a></li><li><a onclick="nav('commissioning')">Commissioning Solutions</a></li><li><a onclick="nav('decommissioning')">Decommissioning Solutions</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<div class="page" id="page-repairs">
+  <div class="page-hero"><h1>Repairs</h1><p>Back-to-Base Repair Services</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('tech-solutions')"> Technical Solutions</a><span>›</span> Repairs</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Back-to-Base Repairs</h2>
+      <p>Are you looking for a local repair centre you can rely on? WorkVentures' repair centre offers professional, fast, and affordable repair services for laptops, desktops, and other IT devices.</p>
+      <p>Our technicians have decades of experience working with all major brands and device types. We provide transparent, upfront pricing and fast turnaround times.</p>
+      <p>As a locally based repair centre in Alexandria, NSW, WorkVentures can offer a streamlined service for businesses throughout Sydney and beyond.</p>
+      <a class="btn-primary" onclick="nav('contact')">Book a Repair</a>
+    </div>
+    <div><div class="sidebar-card"><h4>Technical Solutions</h4><ul><li><a onclick="nav('tech-solutions')">Technical Solutions</a></li><li><a onclick="nav('repairs')">Repairs</a></li><li><a onclick="nav('staging')">Staging</a></li><li><a onclick="nav('refurbishment')">Refurbishment</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<div class="page" id="page-staging">
+  <div class="page-hero"><h1>Staging</h1><p>Diverse Staging Solutions for All Businesses</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('tech-solutions')"> Technical Solutions</a><span>›</span> Staging</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Diverse Staging Solutions for All Businesses</h2>
+      <p>Do you need your devices staged for deployment? WorkVentures provides professional staging and imaging services for organisations deploying new or refurbished devices at scale.</p>
+      <p>Our staging services include OS imaging, software installation, configuration, quality assurance testing, asset tagging, and packaging for delivery.</p>
+      <p>We have extensive experience staging large volumes of devices quickly and accurately, ensuring your deployment goes smoothly and on time.</p>
+      <a class="btn-primary" onclick="nav('contact')">Get a Quote</a>
+    </div>
+    <div><div class="sidebar-card"><h4>Technical Solutions</h4><ul><li><a onclick="nav('tech-solutions')">Technical Solutions</a></li><li><a onclick="nav('repairs')">Repairs</a></li><li><a onclick="nav('staging')">Staging</a></li><li><a onclick="nav('refurbishment')">Refurbishment</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<div class="page" id="page-refurbishment">
+  <div class="page-hero"><h1>Refurbishment</h1><p>Professional Equipment Refurbishment Services</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('tech-solutions')"> Technical Solutions</a><span>›</span> Refurbishment</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Professional Equipment Refurbishment Services</h2>
+      <p>Are you looking to refurbish your old devices? WorkVentures provides high-quality device refurbishment services that extend the life of your IT equipment and reduce your environmental footprint.</p>
+      <p>Our refurbishment process includes thorough testing, component replacement where necessary, data sanitisation, cosmetic restoration, and quality assurance. Every refurbished device meets strict quality standards.</p>
+      <p>Refurbished devices are sold through our online shop at affordable prices, contributing to our mission of digital inclusion.</p>
+      <a class="btn-primary" onclick="nav('contact')">Get Started</a>
+    </div>
+    <div><div class="sidebar-card"><h4>Technical Solutions</h4><ul><li><a onclick="nav('tech-solutions')">Technical Solutions</a></li><li><a onclick="nav('refurbishment')">Refurbishment</a></li><li><a onclick="nav('repairs')">Repairs</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<div class="page" id="page-tech-services">
+  <div class="page-hero"><h1>Technical Services</h1><p>Reliable Technical Solutions for Your Business</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span><a onclick="nav('tech-solutions')"> Technical Solutions</a><span>›</span> Technical Services</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Reliable Technical Solutions</h2>
+      <p>Are you looking for reliable and local technical services? WorkVentures' Technical Solutions experts have 30 years of experience in providing proficient technical services for businesses of all sizes.</p>
+      <p>Our services include in-house triage and testing, component-level repairs, firmware updates, custom configurations, and project-based deployments.</p>
+      <p>We pride ourselves on our attention to detail, fast turnaround times, and competitive pricing. As a social enterprise, every service we provide contributes to our mission of creating social inclusion through technology.</p>
+      <a class="btn-primary" onclick="nav('contact')">Get In Touch</a>
+    </div>
+    <div><div class="sidebar-card"><h4>Technical Solutions</h4><ul><li><a onclick="nav('tech-solutions')">Technical Solutions</a></li><li><a onclick="nav('tech-services')">Technical Services</a></li><li><a onclick="nav('repairs')">Repairs</a></li><li><a onclick="nav('staging')">Staging</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<div class="page" id="page-donate">
+  <div class="page-hero"><h1>Donate Technology</h1><p>Give Your Old Devices a New Purpose</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span> Donate Technology</div></div>
+  <section class="section-light"><div class="container">
+    <div class="section-header"><h2>Donate Technology</h2><div class="divider"></div><p>Your old devices can change lives. When you donate technology to WorkVentures, you are helping to bridge the digital divide and create more inclusive communities across Australia.</p></div>
+    <div class="two-col-text">
+      <div class="content-section">
+        <h3>How Your Donation Helps</h3>
+        <p>Donated devices are professionally refurbished by our technical team and then distributed to individuals, families, and not-for-profit organisations who cannot afford technology. Every device is fully tested and comes with technical support.</p>
+        <p>Since 2000, WorkVentures has distributed over 100,000 technology packs to underserved Australians — and it's all made possible by generous technology donations from our corporate and individual partners.</p>
+        <a class="btn-primary" onclick="nav('contact')">Donate Today</a>
+      </div>
+      <div class="content-section">
+        <h3>What We Accept</h3>
+        <ul>
+          <li>Laptops and desktop computers (less than 8 years old)</li>
+          <li>Tablets and iPads</li>
+          <li>Monitors</li>
+          <li>Printers and accessories</li>
+          <li>Mobile phones</li>
+          <li>Networking equipment</li>
+        </ul>
+        <p>All donated devices undergo secure data erasure to protect your organisation's information before being refurbished and redistributed.</p>
+      </div>
+    </div>
+  </div></section>
+</div>
+
+<div class="page" id="page-member">
+  <div class="page-hero"><h1>Become a Member</h1><p>Join the WorkVentures Community</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span> Become a Member</div></div>
+  <section class="section-light"><div class="container">
+    <div class="section-header"><h2>Become a Member</h2><div class="divider"></div><p>Becoming a WorkVentures member is a great way to show your support for our mission and stay connected with our work.</p></div>
+    <div class="content-section" style="max-width:700px;margin:0 auto;">
+      <p>As a WorkVentures member, you will receive regular updates on our programs and social impact, invitations to WorkVentures events, and the opportunity to contribute to our governance through participation at our AGM.</p>
+      <p>WorkVentures is a not-for-profit company limited by guarantee. Membership is open to individuals and organisations who support WorkVentures' mission.</p>
+      <a class="btn-primary" onclick="nav('contact')">Apply for Membership</a>
+    </div>
+  </div></section>
+</div>
+
+<div class="page" id="page-media">
+  <div class="page-hero"><h1>Media Hub</h1><p>News, Media Releases, and Updates from WorkVentures</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span> Media Hub</div></div>
+  <section class="section-light"><div class="container">
+    <div class="section-header"><h2>Media Hub</h2><div class="divider"></div></div>
+    <p style="text-align:center;color:var(--text-mid);margin-bottom:40px;">Stay up to date with the latest news and updates from WorkVentures.</p>
+    <div class="programs-grid">
+      <div class="program-card">
+        <div class="program-card-img"><i class="fas fa-newspaper"></i></div>
+        <div class="program-card-body">
+          <h4>WorkVentures Annual Report 2024</h4>
+          <p>Read our latest annual report detailing our social impact and achievements.</p>
+          <a href="https://catalog.workventures.com.au/AnnualReport2024" target="_blank">Read More →</a>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-card-img"><i class="fas fa-bullhorn"></i></div>
+        <div class="program-card-body">
+          <h4>Media Releases</h4>
+          <p>Official media releases and announcements from WorkVentures.</p>
+          <a onclick="nav('contact')">Read More →</a>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-card-img"><i class="fas fa-blog"></i></div>
+        <div class="program-card-body">
+          <h4>News &amp; Stories</h4>
+          <p>Stories from our community, trainees, and partners.</p>
+          <a onclick="nav('contact')">Read More →</a>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-card-img"><i class="fas fa-camera"></i></div>
+        <div class="program-card-body">
+          <h4>Photo Gallery</h4>
+          <p>Photos from WorkVentures events, programs, and activities.</p>
+          <a onclick="nav('contact')">View Gallery →</a>
+        </div>
+      </div>
+    </div>
+  </div></section>
+</div>
+
+<div class="page" id="page-advocacy">
+  <div class="page-hero"><h1>Advocacy &amp; Impact</h1><p>Driving Systemic Change for Digital Inclusion and Youth Employment</p></div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span> Advocacy &amp; Impact</div></div>
+  <section class="section-light"><div class="container content-with-sidebar">
+    <div class="content-section">
+      <h2>Advocacy &amp; Impact</h2>
+      <p>WorkVentures is not only a service provider — we are advocates for systemic change in the areas of digital inclusion, youth employment, and environmental sustainability.</p>
+      <p>We work with government, industry, and community organisations to advocate for policies and programs that create a more equitable and inclusive Australia.</p>
+      <h3>Our Advocacy Focus Areas</h3>
+      <ul>
+        <li>Closing the digital divide in Australia</li>
+        <li>Reducing youth unemployment through quality traineeships</li>
+        <li>Promoting circular economy principles in IT</li>
+        <li>Supporting First Nations digital inclusion and employment</li>
+        <li>Advancing NFP cyber security capability</li>
+      </ul>
+    </div>
+    <div><div class="sidebar-card"><h4>About Us</h4><ul><li><a onclick="nav('about')">About WorkVentures</a></li><li><a onclick="nav('advocacy')">Advocacy &amp; Impact</a></li><li><a onclick="nav('social-impact')">Social Impact</a></li></ul></div></div>
+  </div></section>
+</div>
+
+<!-- ========================================================= -->
+<!-- PAGE: CONTACT -->
+<!-- ========================================================= -->
+<div class="page" id="page-contact">
+  <div class="page-hero">
+    <h1>Contact Us</h1>
+    <p>We'd love to hear from you. Get in touch with the WorkVentures team today.</p>
+  </div>
+  <div class="breadcrumb"><div class="container"><a onclick="nav('home')">Home</a><span>›</span> Contact Us</div></div>
+  <section class="section-light">
+    <div class="container">
+      <div class="contact-section">
+        <div class="contact-form">
+          <h2>Send Us a Message</h2>
+          <div class="form-group"><label>Name</label><input type="text" placeholder="Your Name"></div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="Your Email"></div>
+          <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="Your Phone Number"></div>
+          <div class="form-group"><label>Subject</label><input type="text" placeholder="Subject"></div>
+          <div class="form-group"><label>Message</label><textarea placeholder="Your Message"></textarea></div>
+          <button class="btn-primary" onclick="alert('Thank you! Your message has been sent.')">Submit</button>
+        </div>
+        <div>
+          <div class="contact-info-block">
+            <h3>CONNECT WITH US</h3>
+            <div class="contact-item">
+              <div class="ci-icon"><i class="fas fa-phone"></i></div>
+              <div><strong>Free Call</strong><p>1800 112 205</p></div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon"><i class="fas fa-phone-alt"></i></div>
+              <div><strong>General Enquiries</strong><p>(02) 8907 3300</p></div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+              <div><strong>Email</strong><p>info@workventures.com.au</p></div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div><strong>Address</strong><p>Building 3, Suite 3.01<br>190 Bourke Road<br>ALEXANDRIA NSW 2015</p></div>
+            </div>
+            <div style="margin-top:24px;">
+              <h3 style="margin-bottom:14px;font-size:14px;">Follow Us</h3>
+              <div class="social-links">
+                <a href="https://www.facebook.com/workventures" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/workventures" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/company/workventures" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/workventuresaus" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/user/WorkVentures" target="_blank"><i class="fab fa-youtube"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- FOOTER (shown on all pages) -->
+<!-- ========================================================= -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <div class="footer-logo">
+          <div style="display:flex;align-items:center;gap:10px;cursor:pointer;" onclick="nav('home')">
+            <div class="logo-icon" style="width:42px;height:42px;">
+              <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4 L36 14 L36 26 L20 36 L4 26 L4 14 Z" fill="white" opacity="0.9"/>
+                <path d="M20 8 L32 15 L32 25 L20 32 L8 25 L8 15 Z" fill="#f47920"/>
+                <text x="20" y="24" text-anchor="middle" fill="white" font-size="13" font-weight="bold" font-family="Montserrat">W</text>
+              </svg>
+            </div>
+            <div class="logo-text" style="color:white;">Work<span>Ventures</span></div>
+          </div>
+        </div>
+        <p>WorkVentures acknowledges traditional owners of country throughout Australia. We pay our respects to Aboriginal and Torres Strait Islander Elders past, present, and emerging. WorkVentures supports the Uluru Statement from the Heart.</p>
+        <div class="social-links" style="margin-top:16px;">
+          <a href="https://www.facebook.com/workventures" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com/workventures" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.linkedin.com/company/workventures" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/workventuresaus" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/user/WorkVentures" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+        <div style="margin-top:18px;">
+          <p style="font-size:12px;margin-bottom:4px;"><i class="fas fa-map-marker-alt" style="color:var(--orange);margin-right:6px;"></i>Building 3, Suite 3.01, 190 Bourke Road, ALEXANDRIA NSW 2015</p>
+          <p style="font-size:12px;margin-bottom:4px;"><i class="fas fa-phone" style="color:var(--orange);margin-right:6px;"></i>General Enquiries: (02) 8907 3300</p>
+          <p style="font-size:12px;margin-bottom:4px;"><i class="fas fa-phone-alt" style="color:var(--orange);margin-right:6px;"></i>Sales &amp; Support: 1800 112 205</p>
+          <p style="font-size:12px;"><i class="fas fa-envelope" style="color:var(--orange);margin-right:6px;"></i>info@workventures.com.au</p>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>About Us</h4>
+        <ul>
+          <li><a onclick="nav('about')">About WorkVentures</a></li>
+          <li><a onclick="nav('board')">Our Board</a></li>
+          <li><a onclick="nav('team')">Our Team</a></li>
+          <li><a onclick="nav('history')">Our History</a></li>
+          <li><a onclick="nav('founder')">Our Founder</a></li>
+          <li><a onclick="nav('governance')">Corporate Governance</a></li>
+          <li><a onclick="nav('quality')">Certification &amp; Accreditation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Solutions</h4>
+        <ul>
+          <li><a onclick="nav('youth-employment')">Youth Employment Solutions</a></li>
+          <li><a onclick="nav('it-solutions')">IT Solutions</a></li>
+          <li><a onclick="nav('logistics')">Logistics Solutions</a></li>
+          <li><a onclick="nav('tech-solutions')">Technical Solutions</a></li>
+          <li><a onclick="nav('circularit')">Circular IT</a></li>
+          <li><a onclick="nav('cyber-security')">Cyber Security</a></li>
+          <li><a onclick="nav('national-device-bank')">National Device Bank</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Programs</h4>
+        <ul>
+          <li><a onclick="nav('digital-inclusion')">Digital Inclusion</a></li>
+          <li><a onclick="nav('affordable-laptops')">Affordable Laptops &amp; PCs</a></li>
+          <li><a onclick="nav('traineeship-program')">Traineeships</a></li>
+          <li><a onclick="nav('work-placement')">Work Placement</a></li>
+          <li><a onclick="nav('cyber-careers')">Cyber Careers</a></li>
+          <li><a onclick="nav('ewaste')">E-Waste Solutions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get Involved</h4>
+        <ul>
+          <li><a onclick="nav('donate')">Donate Technology</a></li>
+          <li><a onclick="nav('member')">Become a Member</a></li>
+          <li><a onclick="nav('sourcing-trainees')">Hire a Trainee</a></li>
+          <li><a onclick="nav('contact')">Contact Us</a></li>
+          <li><a href="https://shop.workventures.com.au" target="_blank">Shop</a></li>
+          <li><a onclick="nav('media')">Media Hub</a></li>
+          <li><a onclick="nav('advocacy')">Advocacy &amp; Impact</a></li>
+        </ul>
+        <div style="margin-top:20px;">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="https://shop.workventures.com.au/privacy-policy/" target="_blank">Privacy Policy</a></li>
+            <li><a href="https://shop.workventures.com.au/terms-conditions/" target="_blank">Terms &amp; Conditions</a></li>
+            <li><a href="https://shop.workventures.com.au/warranty-refund/" target="_blank">Warranty &amp; Refund</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2023 Workventures Ltd. All Rights Reserved.</div>
+      <div class="footer-bottom-links">
+        <a href="https://shop.workventures.com.au/privacy-policy/" target="_blank">Privacy Policy</a>
+        <a href="https://shop.workventures.com.au/terms-conditions/" target="_blank">Terms &amp; Conditions</a>
+        <a href="https://shop.workventures.com.au/warranty-refund/" target="_blank">Warranty &amp; Refund</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="acknowledgement">
+  <div class="container">
+    <p>WorkVentures acknowledges traditional owners of country throughout Australia. We pay our respects to Aboriginal and Torres Strait Islander Elders past, present, and emerging. WorkVentures supports the Uluru Statement from the Heart.</p>
+  </div>
+</div>
+
+<!-- SCROLL TO TOP -->
+<div class="scroll-top" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></div>
+
+<script>
+// PAGE NAVIGATION
+function nav(page) {
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+
+  // Show target page
+  const el = document.getElementById('page-' + page);
+  if (el) {
+    el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    // Fallback to home
+    document.getElementById('page-home').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Update nav active state
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('nav-active'));
+}
+
+// Counter animation
+function animateCounters() {
+  const counters = [
+    { el: 'stat1', target: 5000, suffix: '+' },
+    { el: 'stat2', target: 100000, suffix: '+' },
+    { el: 'stat3', target: 2000, suffix: '+' },
+    { el: 'stat4', target: 50000, suffix: '+' },
+  ];
+  counters.forEach(({ el, target, suffix }) => {
+    const element = document.getElementById(el);
+    if (!element) return;
+    let count = 0;
+    const step = Math.ceil(target / 80);
+    const timer = setInterval(() => {
+      count = Math.min(count + step, target);
+      element.textContent = count.toLocaleString() + suffix;
+      if (count >= target) clearInterval(timer);
+    }, 20);
+  });
+}
+
+// Trigger counters on scroll into view
+const statsSection = document.querySelector('.stats-grid');
+let countersAnimated = false;
+if (statsSection) {
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !countersAnimated) {
+      countersAnimated = true;
+      animateCounters();
+    }
+  });
+  observer.observe(statsSection);
+}
+
+// FAQ toggle
+function toggleFaq(el) {
+  const item = el.parentElement;
+  item.classList.toggle('open');
+}
+
+// Scroll to top
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Show/hide scroll button
+window.addEventListener('scroll', () => {
+  const btn = document.querySelector('.scroll-top');
+  if (btn) btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+});
+document.querySelector('.scroll-top').style.display = 'none';
+</script>
+</body>
+</html>
