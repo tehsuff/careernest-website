@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>CareerNest ~ Student Placement & IT Social Enterprise</title>
+<title>CareerNest ~ Student Placement Company</title>
 <!-- Font Awesome 6 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
   * {
     margin: 0;
@@ -20,8 +20,8 @@
     --dark-navy: #1a2e4a;
     --mid-navy: #243d5c;
     --light-gray: #f5f5f5;
-    --text-dark: #333;
-    --text-mid: #555;
+    --text-dark: #1f2937;
+    --text-mid: #4b5563;
     --white: #fff;
   }
 
@@ -80,36 +80,47 @@
     padding: 0 30px;
     max-width: 1280px;
     margin: 0 auto;
-    height: 80px;
+    height: 85px;
   }
+  
+  /* ===== LOGO THEME STYLES (Based on provided image) ===== */
   .logo {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
+    align-items: flex-start;
     text-decoration: none;
     cursor: pointer;
+    line-height: 1.2;
   }
-  /* Logo Image Styles */
-  .logo-image {
-    height: 55px;
-    width: auto;
-    display: block;
-    object-fit: contain;
-  }
-  /* Fallback text logo in case image fails to load */
-  .logo-text-fallback {
-    display: none;
+  .logo-main {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
-    font-size: 20px;
+    font-weight: 900;
+    font-size: 28px;
+    letter-spacing: 1px;
     color: var(--dark-navy);
-    line-height: 1.1;
   }
-  .logo-text-fallback span { color: var(--orange); }
+  .logo-main span {
+    color: var(--orange);
+  }
+  .logo-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    color: var(--text-mid);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  /* Logo image fallback (if using actual image, but we use text theme) */
+  .logo-image {
+    display: none;
+  }
   
-  /* If image loads successfully, hide fallback, but we keep both for safety */
   @media (max-width: 480px) {
-    .logo-image { height: 45px; }
+    .logo-main { font-size: 22px; }
+    .logo-sub { font-size: 7px; letter-spacing: 2px; }
+    .header-inner { height: 70px; }
+    nav > ul > li > a { padding: 20px 10px; font-size: 10px; }
   }
 
   nav { display: flex; align-items: center; }
@@ -227,6 +238,7 @@
     border-radius: 3px;
     cursor: pointer;
     border: none;
+    transition: background 0.2s, transform 0.15s;
   }
   .btn-primary:hover { background: #d96a10; transform: translateY(-1px); }
   .btn-outline {
@@ -243,6 +255,7 @@
     border-radius: 3px;
     border: 2px solid white;
     cursor: pointer;
+    transition: background 0.2s;
   }
   .btn-outline:hover { background: rgba(255,255,255,0.1); }
 
@@ -340,9 +353,9 @@
     box-shadow: 0 3px 15px rgba(0,0,0,0.07);
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .program-card:hover { transform: translateY(-4px); }
+  .program-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
   .program-card-img {
     height: 140px;
     background: var(--dark-navy);
@@ -432,9 +445,24 @@
   }
   .footer-col ul { list-style: none; }
   .footer-col ul li { margin-bottom: 8px; }
-  .footer-col ul li a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 13px; cursor: pointer; }
+  .footer-col ul li a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 13px; cursor: pointer; transition: color 0.2s; }
   .footer-col ul li a:hover { color: var(--orange); }
   .footer-col h4 { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; margin-bottom: 18px; }
+  
+  /* Footer logo theme */
+  .footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+  .footer-logo .logo-main {
+    font-size: 24px;
+    color: white;
+  }
+  .footer-logo .logo-sub {
+    color: rgba(255,255,255,0.6);
+  }
 </style>
 </head>
 <body>
@@ -450,10 +478,10 @@
 
 <header>
   <div class="header-inner">
-    <!-- Logo Area: Using navbar_logo.png from images folder -->
+    <!-- Logo Theme: CareerNest with STUDENT PLACEMENT COMPANY subtitle -->
     <a class="logo" onclick="nav('home')">
-      <img src="images/navbar_logo.png" alt="CareerNest Logo" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-      <div class="logo-text-fallback">Career<span>Nest</span></div>
+      <div class="logo-main">Career<span>Nest</span></div>
+      <div class="logo-sub">STUDENT PLACEMENT COMPANY</div>
     </a>
     <nav>
       <ul>
@@ -475,7 +503,7 @@
   </div>
 </header>
 
-<!-- ========== HOME PAGE (merged with careerroute content) ========== -->
+<!-- ========== HOME PAGE ========== -->
 <div class="page active" id="page-home">
   <div class="hero">
     <div class="container">
@@ -531,7 +559,7 @@
   <section class="section-light">
     <div class="container">
       <div class="about-grid" style="direction:ltr;">
-        <div><img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CEO Musa Raza"></div>
+        <div><img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CEO"></div>
         <div><h2>CEO Says: We're With You — Every Step of the Way</h2><p>I've been working in this field for the past 3 years, and I understand how important placements and career growth are for every student. That's why I personally take one-on-one interview preparation sessions — to help you feel confident, prepared, and ready to crack your placement in one go. Your success is our success. And we're here to support you at every step.</p><p><strong>Musa Raza</strong> – CEO, CareerNest</p><a class="btn-primary" onclick="nav('about')">About Us</a></div>
       </div>
     </div>
@@ -555,7 +583,7 @@
   </section>
 </div>
 
-<!-- ========== ADDITIONAL PAGES PRESERVED ========== -->
+<!-- ========== ADDITIONAL PAGES ========== -->
 <div class="page" id="page-about"><div class="page-hero"><h1>About CareerNest</h1><p>Australia's leading student placement & IT social enterprise.</p></div><section class="section-light"><div class="container"><p>CareerNest was founded to bridge the gap between education and employment. We provide real-world placement experiences, affordable technology, and youth employment pathways.</p></div></section></div>
 <div class="page" id="page-youth-employment"><div class="page-hero"><h1>Youth Employment Solutions</h1><p>Meaningful Traineeships & Work Placements</p></div><section class="section-light"><div class="container"><p>We help students find paid traineeships with 88% completion rate. One-on-one interview prep included.</p></div></section></div>
 <div class="page" id="page-it-solutions"><div class="page-hero"><h1>IT Solutions</h1><p>Affordable Technology for All</p></div><section class="section-light"><div class="container"><p>Refurbished laptops, digital inclusion packages, and cyber security for NFPs.</p></div></section></div>
@@ -573,15 +601,20 @@
 <div class="page" id="page-traineeship-program"><div class="page-hero"><h1>Traineeship Program</h1></div><section><div class="container"><p>Paid work + nationally recognised qualification.</p></div></section></div>
 <div class="page" id="page-work-placement"><div class="page-hero"><h1>Work Placement</h1></div><section><div class="container"><p>Real-world experience for students.</p></div></section></div>
 <div class="page" id="page-digital-inclusion"><div class="page-hero"><h1>Digital Inclusion</h1></div><section><div class="container"><p>Technology packages for underserved communities.</p></div></section></div>
-<div class="page" id="page-affordable-laptops"><div class="page-hero"><h1>Affordable Laptops</h1></div><section><div class="container"><p>Refurbished laptops with warranty.</p></div></section></div>
-<div class="page" id="page-cyber-security"><div class="page-hero"><h1>Cyber Security</h1></div><section><div class="container"><p>Protecting NFPs with affordable services.</p></div></section></div>
 
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <div><div class="logo-text-fallback" style="display:block;color:white;margin-bottom:15px;">Career<span style="color:var(--orange);">Nest</span></div><p>Empowering individuals to create vibrant, inclusive communities through student placement and technology.</p></div>
+      <div>
+        <div class="footer-logo">
+          <div class="logo-main" style="color:white;">Career<span style="color:var(--orange);">Nest</span></div>
+          <div class="logo-sub" style="color:rgba(255,255,255,0.6);">STUDENT PLACEMENT COMPANY</div>
+        </div>
+        <p style="margin-top:15px; font-size:13px; opacity:0.7;">Empowering individuals to create vibrant, inclusive communities through student placement and technology.</p>
+      </div>
       <div class="footer-col"><h4>Quick Links</h4><ul><li><a onclick="nav('home')">Home</a></li><li><a onclick="nav('about')">About</a></li><li><a onclick="nav('contact')">Contact</a></li></ul></div>
-      <div class="footer-col"><h4>Solutions</h4><ul><li><a onclick="nav('youth-employment')">Youth Employment</a></li><li><a onclick="nav('it-solutions')">IT Solutions</a></li></ul></div>
+      <div class="footer-col"><h4>Solutions</h4><ul><li><a onclick="nav('youth-employment')">Youth Employment</a></li><li><a onclick="nav('it-solutions')">IT Solutions</a></li><li><a onclick="nav('logistics')">Logistics</a></li></ul></div>
+      <div class="footer-col"><h4>Get Involved</h4><ul><li><a onclick="nav('donate')">Donate</a></li><li><a onclick="nav('member')">Membership</a></li></ul></div>
     </div>
     <div class="footer-bottom"><div>© 2025 CareerNest. All rights reserved.</div><div><a href="#" style="color:rgba(255,255,255,0.5);text-decoration:none;">Privacy Policy</a></div></div>
   </div>
