@@ -65,7 +65,6 @@
   .page.active .section-header,
   .page.active .about-grid > *,
   .page.active .program-card,
-  .page.active .solution-card,
   .page.active .testimonial-card {
     animation: fadeSlideUp 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
     opacity: 0;
@@ -79,10 +78,6 @@
   .page.active .program-card:nth-child(2) { animation-delay: 0.2s; }
   .page.active .program-card:nth-child(3) { animation-delay: 0.3s; }
   .page.active .program-card:nth-child(4) { animation-delay: 0.4s; }
-  .page.active .solution-card:nth-child(1) { animation-delay: 0.1s; }
-  .page.active .solution-card:nth-child(2) { animation-delay: 0.2s; }
-  .page.active .solution-card:nth-child(3) { animation-delay: 0.3s; }
-  .page.active .solution-card:nth-child(4) { animation-delay: 0.4s; }
   .page.active .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
   .page.active .testimonial-card:nth-child(2) { animation-delay: 0.2s; }
   .page.active .testimonial-card:nth-child(3) { animation-delay: 0.3s; }
@@ -368,37 +363,7 @@
     transition: transform 0.3s ease, box-shadow 0.3s;
   }
   .about-grid img:hover { transform: scale(1.01); box-shadow: 0 18px 40px rgba(0,0,0,0.2); }
-  .solutions-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-  }
-  .solution-card {
-    padding: 40px 30px;
-    text-align: center;
-    border: 1px solid rgba(255,255,255,0.1);
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  }
-  .solution-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-5px); }
-  .solution-card .icon {
-    width: 70px;
-    height: 70px;
-    background: var(--orange);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 28px;
-    color: white;
-    transition: transform 0.2s;
-  }
-  .solution-card:hover .icon { transform: scale(1.05); }
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-  }
+  
   .programs-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -482,12 +447,12 @@
     flex-wrap: wrap;
   }
   @media (max-width: 1024px) {
-    .solutions-grid, .stats-grid, .programs-grid, .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .programs-grid { grid-template-columns: repeat(2, 1fr); }
     .about-grid, .contact-section, .footer-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 768px) {
     .hero h1 { font-size: 30px; }
-    .solutions-grid, .stats-grid, .programs-grid { grid-template-columns: 1fr; }
+    .programs-grid { grid-template-columns: 1fr; }
     .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
   }
   .page-hero {
@@ -544,14 +509,6 @@
           <ul class="submenu"><li><a onclick="nav('about')">About CareerNest</a></li><li><a onclick="nav('board')">Our Board</a></li><li><a onclick="nav('team')">Our Team</a></li><li><a onclick="nav('history')">Our History</a></li><li><a onclick="nav('founder')">Our Founder</a></li><li><a onclick="nav('governance')">Governance</a></li><li><a onclick="nav('quality')">Certification</a></li></ul>
         </li>
         <li><a onclick="nav('social-impact')">Social Impact</a></li>
-        <li class="dropdown"><a>Our Solutions ▾</a>
-          <ul class="submenu">
-            <li><a onclick="nav('it-solutions')">IT Solutions</a></li>
-            <li><a onclick="nav('youth-employment')">Youth Employment</a></li>
-            <li><a onclick="nav('logistics')">Logistics Solutions</a></li>
-            <li><a onclick="nav('tech-solutions')">Technical Solutions</a></li>
-          </ul>
-        </li>
         <li><a onclick="nav('contact')">Contact Us</a></li>
       </ul>
     </nav>
@@ -566,7 +523,7 @@
         <div class="hero-eyebrow">CareerNest</div>
         <h1>The journey of a thousand miles begins with a single step.</h1>
         <p>At CareerNest, we believe every successful placement journey begins with a single step. We're here to guide students from their first move toward a bright and rewarding career path, while also empowering communities through technology and social enterprise.</p>
-        <a class="btn-primary" onclick="nav('youth-employment')">Explore Services</a>
+        <a class="btn-primary" onclick="nav('contact')">Explore Services</a>
         <a class="btn-outline" onclick="nav('about')">Our Mission</a>
       </div>
     </div>
@@ -587,18 +544,6 @@
     </div>
   </section>
 
-  <section class="section-navy" style="padding:0;">
-    <div class="container" style="padding:0;max-width:100%;">
-      <div style="padding:50px 30px 20px;text-align:center;"><h2 style="color:white;">Our Core Solutions</h2><div class="divider"></div></div>
-      <div class="solutions-grid">
-        <div class="solution-card" onclick="nav('youth-employment')"><div class="icon"><i class="fas fa-user-graduate"></i></div><h3>Youth Employment</h3><p>Real traineeships & work placements</p><a style="color:var(--orange);">Learn More →</a></div>
-        <div class="solution-card" onclick="nav('it-solutions')"><div class="icon"><i class="fas fa-laptop"></i></div><h3>IT Solutions</h3><p>Affordable tech & digital inclusion</p><a style="color:var(--orange);">Learn More →</a></div>
-        <div class="solution-card" onclick="nav('logistics')"><div class="icon"><i class="fas fa-boxes"></i></div><h3>Logistics</h3><p>Circular IT & e-waste solutions</p><a style="color:var(--orange);">Learn More →</a></div>
-        <div class="solution-card" onclick="nav('tech-solutions')"><div class="icon"><i class="fas fa-tools"></i></div><h3>Technical Services</h3><p>Repairs & refurbishment</p><a style="color:var(--orange);">Learn More →</a></div>
-      </div>
-    </div>
-  </section>
-
   <section class="section-gray">
     <div class="container">
       <div class="section-header"><h2>Positive Outcomes for All</h2><div class="divider"></div><p>We provide value to students, RTOs, and employers by building strong connections and achieving successful job placements.</p></div>
@@ -614,7 +559,7 @@
   <section class="section-light">
     <div class="container">
       <div class="about-grid" style="direction:ltr;">
-        <div><img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CEO"></div>
+        <div><img src="images/musa-raza.jpg&auto=format&fit=crop&w=800&q=80" alt="CEO"></div>
         <div><h2>CEO Says: We're With You — Every Step of the Way</h2><p>I've been working in this field for the past 3 years, and I understand how important placements and career growth are for every student. That's why I personally take one-on-one interview preparation sessions — to help you feel confident, prepared, and ready to crack your placement in one go. Your success is our success. And we're here to support you at every step.</p><p><strong>Musa Raza</strong> – CEO, CareerNest</p><a class="btn-primary" onclick="nav('about')">About Us</a></div>
       </div>
     </div>
@@ -622,10 +567,10 @@
 
   <section class="section-gray">
     <div class="container"><div class="section-header"><h2>What Our Partners Say</h2><div class="divider"></div></div>
-      <div class="testimonials-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:25px;">
-        <div class="testimonial-card"><p>"CareerNest connected me to an amazing placement where I learned more than I ever expected. It truly kickstarted my career."</p><div><strong>Sophie M., Business Student</strong></div></div>
-        <div class="testimonial-card"><p>"Working with CareerNest has made our placement process seamless. Our students are now more prepared and confident."</p><div><strong>David L., Placement Coordinator</strong></div></div>
-        <div class="testimonial-card"><p>"The affordable laptops program helped our GO Scholars access technology. CareerNest is a trusted partner for digital inclusion."</p><div><strong>Charlene Davison, GO Foundation</strong></div></div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:25px;">
+        <div class="testimonial-card" style="background:white; border-radius:6px; padding:30px; box-shadow:0 3px 15px rgba(0,0,0,0.07); border-top:4px solid var(--orange);"><p>"CareerNest connected me to an amazing placement where I learned more than I ever expected. It truly kickstarted my career."</p><div><strong>Sophie M., Business Student</strong></div></div>
+        <div class="testimonial-card" style="background:white; border-radius:6px; padding:30px; box-shadow:0 3px 15px rgba(0,0,0,0.07); border-top:4px solid var(--orange);"><p>"Working with CareerNest has made our placement process seamless. Our students are now more prepared and confident."</p><div><strong>David L., Placement Coordinator</strong></div></div>
+        <div class="testimonial-card" style="background:white; border-radius:6px; padding:30px; box-shadow:0 3px 15px rgba(0,0,0,0.07); border-top:4px solid var(--orange);"><p>"The affordable laptops program helped our GO Scholars access technology. CareerNest is a trusted partner for digital inclusion."</p><div><strong>Charlene Davison, GO Foundation</strong></div></div>
       </div>
     </div>
   </section>
@@ -640,10 +585,6 @@
 
 <!-- ========== ADDITIONAL PAGES ========== -->
 <div class="page" id="page-about"><div class="page-hero"><h1>About CareerNest</h1><p>Australia's leading student placement & IT social enterprise.</p></div><section class="section-light"><div class="container"><p>CareerNest was founded to bridge the gap between education and employment. We provide real-world placement experiences, affordable technology, and youth employment pathways.</p></div></section></div>
-<div class="page" id="page-youth-employment"><div class="page-hero"><h1>Youth Employment Solutions</h1><p>Meaningful Traineeships & Work Placements</p></div><section class="section-light"><div class="container"><p>We help students find paid traineeships with 88% completion rate. One-on-one interview prep included.</p></div></section></div>
-<div class="page" id="page-it-solutions"><div class="page-hero"><h1>IT Solutions</h1><p>Affordable Technology for All</p></div><section class="section-light"><div class="container"><p>Refurbished laptops, digital inclusion packages, and cyber security for NFPs.</p></div></section></div>
-<div class="page" id="page-logistics"><div class="page-hero"><h1>Logistics Solutions</h1><p>Circular IT & E-Waste Management</p></div><section class="section-light"><div class="container"><p>Sustainable IT asset disposition and 3PL services.</p></div></section></div>
-<div class="page" id="page-tech-solutions"><div class="page-hero"><h1>Technical Solutions</h1><p>Repairs, Staging & Refurbishment</p></div><section class="section-light"><div class="container"><p>Professional technical services for businesses.</p></div></section></div>
 <div class="page" id="page-social-impact"><div class="page-hero"><h1>Social Impact</h1></div><section><div class="container"><p>5,000+ young people assisted, 100,000+ tech packs distributed.</p></div></section></div>
 <div class="page" id="page-contact"><div class="page-hero"><h1>Contact Us</h1></div><section><div class="container"><div class="contact-section"><div><h2>Send Message</h2><input placeholder="Name"><input placeholder="Email"><textarea></textarea><button class="btn-primary">Send</button></div><div><p>Email: info@careernest.com.au | Phone: 1800 112 205</p></div></div></div></section></div>
 <div class="page" id="page-history"><div class="page-hero"><h1>Our History</h1></div><section><div class="container"><p>Founded in 1979, CareerNest has grown into Australia's leading placement & IT social enterprise.</p></div></section></div>
@@ -668,7 +609,6 @@
         <p style="margin-top:15px; font-size:13px; opacity:0.7;">Empowering individuals to create vibrant, inclusive communities through student placement and technology.</p>
       </div>
       <div class="footer-col"><h4>Quick Links</h4><ul><li><a onclick="nav('home')">Home</a></li><li><a onclick="nav('about')">About</a></li><li><a onclick="nav('contact')">Contact</a></li></ul></div>
-      <div class="footer-col"><h4>Solutions</h4><ul><li><a onclick="nav('youth-employment')">Youth Employment</a></li><li><a onclick="nav('it-solutions')">IT Solutions</a></li><li><a onclick="nav('logistics')">Logistics</a></li></ul></div>
       <div class="footer-col"><h4>Get Involved</h4><ul><li><a onclick="nav('donate')">Donate</a></li><li><a onclick="nav('member')">Membership</a></li></ul></div>
     </div>
     <div class="footer-bottom"><div>© 2025 CareerNest. All rights reserved.</div><div><a href="#" style="color:rgba(255,255,255,0.5);text-decoration:none;">Privacy Policy</a></div></div>
@@ -713,13 +653,6 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
   handleScrollVisibility();
-  
-  // optional: add active link highlight style based on scroll/ nav (simple)
-  // ensure all dropdown submenu clicks trigger nav and close? already good.
-  
-  // fix missing ".testimonials-grid" class for homepage
-  const testimonialGrid = document.querySelector('.section-gray .testimonials-grid');
-  if(testimonialGrid && !testimonialGrid.style.display) testimonialGrid.style.display = 'grid';
 </script>
 </body>
 </html>
