@@ -23,6 +23,8 @@
     --text-dark: #1f2937;
     --text-mid: #4b5563;
     --white: #fff;
+    --transition-default: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --page-transition: 0.45s cubic-bezier(0.2, 0.9, 0.4, 1.1);
   }
 
   body {
@@ -33,11 +35,69 @@
     overflow-x: hidden;
   }
 
-  /* PAGE SYSTEM */
-  .page { display: none; }
-  .page.active { display: block; animation: fadeIn 0.3s ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
+  /* ========== SMOOTH PAGE TRANSITIONS ========== */
+  .page {
+    display: none;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.5s var(--page-transition), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  
+  .page.active {
+    display: block;
+    animation: pageReveal 0.65s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+  }
+  
+  @keyframes pageReveal {
+    0% {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* stagger fade for inner elements when page becomes active */
+  .page.active .hero-content,
+  .page.active .section-header,
+  .page.active .about-grid > *,
+  .page.active .program-card,
+  .page.active .solution-card,
+  .page.active .testimonial-card {
+    animation: fadeSlideUp 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+    opacity: 0;
+  }
+  
+  .page.active .hero-content { animation-delay: 0.05s; }
+  .page.active .section-header { animation-delay: 0.1s; }
+  .page.active .about-grid > :first-child { animation-delay: 0.12s; }
+  .page.active .about-grid > :last-child { animation-delay: 0.2s; }
+  .page.active .program-card:nth-child(1) { animation-delay: 0.1s; }
+  .page.active .program-card:nth-child(2) { animation-delay: 0.2s; }
+  .page.active .program-card:nth-child(3) { animation-delay: 0.3s; }
+  .page.active .program-card:nth-child(4) { animation-delay: 0.4s; }
+  .page.active .solution-card:nth-child(1) { animation-delay: 0.1s; }
+  .page.active .solution-card:nth-child(2) { animation-delay: 0.2s; }
+  .page.active .solution-card:nth-child(3) { animation-delay: 0.3s; }
+  .page.active .solution-card:nth-child(4) { animation-delay: 0.4s; }
+  .page.active .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+  .page.active .testimonial-card:nth-child(2) { animation-delay: 0.2s; }
+  .page.active .testimonial-card:nth-child(3) { animation-delay: 0.3s; }
+  
+  @keyframes fadeSlideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
   /* TOP BAR */
   .top-bar {
     background: var(--dark-navy);
@@ -45,6 +105,7 @@
     font-size: 12px;
     padding: 8px 0;
     text-align: right;
+    transition: background 0.2s;
   }
   .top-bar .container {
     display: flex;
@@ -55,15 +116,17 @@
     margin: 0 auto;
     padding: 0 30px;
   }
-  .top-bar a { color: white; text-decoration: none; font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.5px; }
+  .top-bar a { color: white; text-decoration: none; font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.5px; transition: color 0.2s ease; }
   .top-bar a:hover { color: var(--orange); }
   .top-bar .btn-donate, .top-bar .btn-shop {
     background: var(--orange);
     padding: 4px 14px;
     border-radius: 3px;
     font-weight: 700;
+    transition: transform 0.2s, background 0.2s;
   }
   .top-bar .btn-shop { background: transparent; border: 1px solid white; }
+  .top-bar .btn-donate:hover, .top-bar .btn-shop:hover { transform: translateY(-1px); background: var(--orange); }
 
   /* HEADER */
   header {
@@ -72,6 +135,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: box-shadow 0.3s;
   }
   .header-inner {
     display: flex;
@@ -83,7 +147,6 @@
     height: 85px;
   }
   
-  /* ===== LOGO THEME STYLES (Based on provided image) ===== */
   .logo {
     display: flex;
     flex-direction: column;
@@ -91,7 +154,9 @@
     text-decoration: none;
     cursor: pointer;
     line-height: 1.2;
+    transition: transform 0.2s ease;
   }
+  .logo:hover { transform: scale(1.01); }
   .logo-main {
     font-family: 'Montserrat', sans-serif;
     font-weight: 900;
@@ -99,9 +164,7 @@
     letter-spacing: 1px;
     color: var(--dark-navy);
   }
-  .logo-main span {
-    color: var(--orange);
-  }
+  .logo-main span { color: var(--orange); }
   .logo-sub {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
@@ -110,10 +173,6 @@
     color: var(--text-mid);
     text-transform: uppercase;
     margin-top: 2px;
-  }
-  /* Logo image fallback (if using actual image, but we use text theme) */
-  .logo-image {
-    display: none;
   }
   
   @media (max-width: 480px) {
@@ -137,7 +196,7 @@
     color: var(--dark-navy);
     text-decoration: none;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: color 0.2s, border-bottom 0.2s;
   }
   nav > ul > li > a:hover, nav > ul > li > a.active { color: var(--orange); }
 
@@ -152,8 +211,11 @@
     box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     z-index: 2000;
     border-top: 3px solid var(--orange);
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
   }
-  .dropdown:hover > .submenu { display: block; }
+  .dropdown:hover > .submenu { display: block; opacity: 1; transform: translateY(0); }
   .submenu li a {
     display: block;
     padding: 10px 18px;
@@ -162,6 +224,7 @@
     text-decoration: none;
     border-bottom: 1px solid #f0f0f0;
     cursor: pointer;
+    transition: all 0.2s ease;
   }
   .submenu li a:hover { background: #f8f8f8; color: var(--orange); padding-left: 22px; }
   .submenu .has-sub { position: relative; }
@@ -174,8 +237,10 @@
     min-width: 220px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     border-top: 3px solid var(--orange);
+    opacity: 0;
+    transition: opacity 0.2s;
   }
-  .submenu .has-sub:hover > .sub-submenu { display: block; }
+  .submenu .has-sub:hover > .sub-submenu { display: block; opacity: 1; }
 
   .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
 
@@ -195,7 +260,9 @@
     top: 0; left: 0; right: 0; bottom: 0;
     background: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
     opacity: 0.15;
+    transition: transform 0.4s ease;
   }
+  .hero:hover::before { transform: scale(1.02); }
   .hero-content {
     position: relative;
     z-index: 1;
@@ -238,9 +305,10 @@
     border-radius: 3px;
     cursor: pointer;
     border: none;
-    transition: background 0.2s, transform 0.15s;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   }
-  .btn-primary:hover { background: #d96a10; transform: translateY(-1px); }
+  .btn-primary:hover { background: #d96a10; transform: translateY(-2px); box-shadow: 0 6px 14px rgba(0,0,0,0.15); }
   .btn-outline {
     display: inline-block;
     background: transparent;
@@ -255,9 +323,9 @@
     border-radius: 3px;
     border: 2px solid white;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.25s ease;
   }
-  .btn-outline:hover { background: rgba(255,255,255,0.1); }
+  .btn-outline:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); border-color: var(--orange); }
 
   section { padding: 70px 0; }
   .section-light { background: white; }
@@ -283,7 +351,9 @@
     height: 4px;
     background: var(--orange);
     margin: 16px auto 20px;
+    transition: width 0.3s ease;
   }
+  .section-header:hover .divider { width: 100px; }
 
   .about-grid {
     display: grid;
@@ -295,7 +365,9 @@
     width: 100%;
     border-radius: 6px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s;
   }
+  .about-grid img:hover { transform: scale(1.01); box-shadow: 0 18px 40px rgba(0,0,0,0.2); }
   .solutions-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -306,9 +378,9 @@
     text-align: center;
     border: 1px solid rgba(255,255,255,0.1);
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
   }
-  .solution-card:hover { background: rgba(255,255,255,0.08); }
+  .solution-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-5px); }
   .solution-card .icon {
     width: 70px;
     height: 70px;
@@ -320,27 +392,12 @@
     margin: 0 auto 20px;
     font-size: 28px;
     color: white;
+    transition: transform 0.2s;
   }
+  .solution-card:hover .icon { transform: scale(1.05); }
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-  }
-  .stat-card {
-    padding: 50px 30px;
-    text-align: center;
-    border-right: 1px solid rgba(255,255,255,0.15);
-  }
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-  }
-  .testimonial-card {
-    background: white;
-    border-radius: 6px;
-    padding: 30px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.07);
-    border-top: 4px solid var(--orange);
   }
   .programs-grid {
     display: grid;
@@ -353,9 +410,9 @@
     box-shadow: 0 3px 15px rgba(0,0,0,0.07);
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.3s ease, box-shadow 0.3s;
   }
-  .program-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
+  .program-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
   .program-card-img {
     height: 140px;
     background: var(--dark-navy);
@@ -364,7 +421,9 @@
     justify-content: center;
     font-size: 50px;
     color: var(--orange);
+    transition: background 0.3s;
   }
+  .program-card:hover .program-card-img { background: var(--orange); color: var(--dark-navy); }
   .program-card-body { padding: 20px; }
   .contact-section {
     display: grid;
@@ -376,7 +435,9 @@
     padding: 30px;
     border-radius: 6px;
     color: white;
+    transition: transform 0.2s;
   }
+  .contact-info-block:hover { transform: translateY(-4px); }
   footer {
     background: #111c2d;
     color: white;
@@ -401,9 +462,16 @@
     justify-content: center;
     cursor: pointer;
     z-index: 999;
-    transition: transform 0.2s;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    opacity: 0;
+    visibility: hidden;
   }
-  .scroll-top:hover { transform: translateY(-3px); }
+  .scroll-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  .scroll-top:hover { transform: translateY(-4px) scale(1.05); background: #d96a10; }
   .footer-bottom {
     padding: 22px 0;
     border-top: 1px solid rgba(255,255,255,0.1);
@@ -428,13 +496,6 @@
     padding: 70px 0;
     text-align: center;
   }
-  .impact-card {
-    background: white;
-    padding: 25px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
-  }
   input, textarea {
     width: 100%;
     padding: 12px;
@@ -442,27 +503,22 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     font-family: inherit;
+    transition: border 0.2s, box-shadow 0.2s;
   }
+  input:focus, textarea:focus { border-color: var(--orange); outline: none; box-shadow: 0 0 0 3px rgba(244,121,32,0.2); }
   .footer-col ul { list-style: none; }
   .footer-col ul li { margin-bottom: 8px; }
-  .footer-col ul li a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 13px; cursor: pointer; transition: color 0.2s; }
-  .footer-col ul li a:hover { color: var(--orange); }
+  .footer-col ul li a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 13px; cursor: pointer; transition: all 0.2s; }
+  .footer-col ul li a:hover { color: var(--orange); transform: translateX(4px); display: inline-block; }
   .footer-col h4 { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; margin-bottom: 18px; }
-  
-  /* Footer logo theme */
   .footer-logo {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 15px;
   }
-  .footer-logo .logo-main {
-    font-size: 24px;
-    color: white;
-  }
-  .footer-logo .logo-sub {
-    color: rgba(255,255,255,0.6);
-  }
+  .footer-logo .logo-main { font-size: 24px; color: white; }
+  .footer-logo .logo-sub { color: rgba(255,255,255,0.6); }
 </style>
 </head>
 <body>
@@ -478,7 +534,6 @@
 
 <header>
   <div class="header-inner">
-    <!-- Logo Theme: CareerNest with STUDENT PLACEMENT COMPANY subtitle -->
     <a class="logo" onclick="nav('home')">
       <div class="logo-main">Career<span>Nest</span></div>
       <div class="logo-sub">STUDENT PLACEMENT COMPANY</div>
@@ -567,7 +622,7 @@
 
   <section class="section-gray">
     <div class="container"><div class="section-header"><h2>What Our Partners Say</h2><div class="divider"></div></div>
-      <div class="testimonials-grid">
+      <div class="testimonials-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:25px;">
         <div class="testimonial-card"><p>"CareerNest connected me to an amazing placement where I learned more than I ever expected. It truly kickstarted my career."</p><div><strong>Sophie M., Business Student</strong></div></div>
         <div class="testimonial-card"><p>"Working with CareerNest has made our placement process seamless. Our students are now more prepared and confident."</p><div><strong>David L., Placement Coordinator</strong></div></div>
         <div class="testimonial-card"><p>"The affordable laptops program helped our GO Scholars access technology. CareerNest is a trusted partner for digital inclusion."</p><div><strong>Charlene Davison, GO Foundation</strong></div></div>
@@ -619,19 +674,52 @@
     <div class="footer-bottom"><div>© 2025 CareerNest. All rights reserved.</div><div><a href="#" style="color:rgba(255,255,255,0.5);text-decoration:none;">Privacy Policy</a></div></div>
   </div>
 </footer>
-<div class="scroll-top" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></div>
+<div class="scroll-top" id="scrollTopBtn"><i class="fas fa-chevron-up"></i></div>
 
 <script>
-function nav(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const el = document.getElementById('page-' + page);
-  if (el) el.classList.add('active');
-  else document.getElementById('page-home').classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-document.querySelector('.scroll-top').style.display = 'none';
-window.addEventListener('scroll', () => { const btn = document.querySelector('.scroll-top'); if (btn) btn.style.display = window.scrollY > 300 ? 'flex' : 'none'; });
+  // Smooth page navigation with transition reset
+  function nav(pageId) {
+    const allPages = document.querySelectorAll('.page');
+    const target = document.getElementById('page-' + pageId);
+    if (!target) {
+      // fallback to home
+      document.getElementById('page-home').classList.add('active');
+      allPages.forEach(p => { if(p.id !== 'page-home') p.classList.remove('active'); });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    // disable active class on all pages, then add to target
+    allPages.forEach(page => {
+      page.classList.remove('active');
+    });
+    target.classList.add('active');
+    // smooth scroll to top after small delay
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 20);
+  }
+  
+  // scroll to top button with smooth + visibility
+  const scrollBtn = document.getElementById('scrollTopBtn');
+  function handleScrollVisibility() {
+    if (window.scrollY > 300) {
+      scrollBtn.classList.add('visible');
+    } else {
+      scrollBtn.classList.remove('visible');
+    }
+  }
+  window.addEventListener('scroll', handleScrollVisibility);
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  handleScrollVisibility();
+  
+  // optional: add active link highlight style based on scroll/ nav (simple)
+  // ensure all dropdown submenu clicks trigger nav and close? already good.
+  
+  // fix missing ".testimonials-grid" class for homepage
+  const testimonialGrid = document.querySelector('.section-gray .testimonials-grid');
+  if(testimonialGrid && !testimonialGrid.style.display) testimonialGrid.style.display = 'grid';
 </script>
 </body>
 </html>
