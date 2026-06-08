@@ -65,6 +65,8 @@
   .page.active .section-header,
   .page.active .about-grid > *,
   .page.active .program-card,
+  .page.active .impact-stats-grid,
+  .page.active .impact-card,
   .page.active .testimonial-card {
     animation: fadeSlideUp 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
     opacity: 0;
@@ -78,6 +80,10 @@
   .page.active .program-card:nth-child(2) { animation-delay: 0.2s; }
   .page.active .program-card:nth-child(3) { animation-delay: 0.3s; }
   .page.active .program-card:nth-child(4) { animation-delay: 0.4s; }
+  .page.active .impact-card:nth-child(1) { animation-delay: 0.1s; }
+  .page.active .impact-card:nth-child(2) { animation-delay: 0.2s; }
+  .page.active .impact-card:nth-child(3) { animation-delay: 0.3s; }
+  .page.active .impact-card:nth-child(4) { animation-delay: 0.4s; }
   .page.active .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
   .page.active .testimonial-card:nth-child(2) { animation-delay: 0.2s; }
   .page.active .testimonial-card:nth-child(3) { animation-delay: 0.3s; }
@@ -222,20 +228,6 @@
     transition: all 0.2s ease;
   }
   .submenu li a:hover { background: #f8f8f8; color: var(--orange); padding-left: 22px; }
-  .submenu .has-sub { position: relative; }
-  .submenu .has-sub > .sub-submenu {
-    display: none;
-    position: absolute;
-    left: 100%;
-    top: 0;
-    background: white;
-    min-width: 220px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    border-top: 3px solid var(--orange);
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-  .submenu .has-sub:hover > .sub-submenu { display: block; opacity: 1; }
 
   .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
 
@@ -390,6 +382,78 @@
   }
   .program-card:hover .program-card-img { background: var(--orange); color: var(--dark-navy); }
   .program-card-body { padding: 20px; }
+  
+  /* Impact Page Specific Styles */
+  .impact-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin: 40px 0;
+  }
+  .impact-card {
+    background: white;
+    padding: 35px 20px;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    border-bottom: 4px solid var(--orange);
+  }
+  .impact-card:hover { transform: translateY(-6px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+  .impact-number {
+    font-size: 48px;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--orange);
+    line-height: 1.2;
+  }
+  .impact-label {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--dark-navy);
+    margin-top: 10px;
+  }
+  .impact-sub {
+    font-size: 13px;
+    color: var(--text-mid);
+    margin-top: 5px;
+  }
+  .impact-list {
+    list-style: none;
+    margin-top: 15px;
+  }
+  .impact-list li {
+    padding: 6px 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 14px;
+  }
+  .partner-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
+  }
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 30px;
+  }
+  .testimonial-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+    border-left: 4px solid var(--orange);
+    transition: transform 0.2s;
+  }
+  .testimonial-card:hover { transform: translateX(4px); }
+  .testimonial-card p { font-style: italic; margin-bottom: 15px; color: var(--text-mid); }
+  .testimonial-card strong { color: var(--dark-navy); font-size: 14px; }
+  
   .contact-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -447,12 +511,12 @@
     flex-wrap: wrap;
   }
   @media (max-width: 1024px) {
-    .programs-grid { grid-template-columns: repeat(2, 1fr); }
+    .programs-grid, .impact-stats-grid, .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
     .about-grid, .contact-section, .footer-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 768px) {
     .hero h1 { font-size: 30px; }
-    .programs-grid { grid-template-columns: 1fr; }
+    .programs-grid, .impact-stats-grid, .testimonial-grid { grid-template-columns: 1fr; }
     .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
   }
   .page-hero {
@@ -516,7 +580,7 @@
 </header>
 
 <!-- ========== HOME PAGE ========== -->
-<div class="page active" id="page-home">
+<div class="page" id="page-home">
   <div class="hero">
     <div class="container">
       <div class="hero-content">
@@ -559,33 +623,101 @@
   <section class="section-light">
     <div class="container">
       <div class="about-grid" style="direction:ltr;">
-        <div><img src="images/musa-raza.jpg" alt="CEO"></div>
+        <div><img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CEO"></div>
         <div><h2>CEO Says: We're With You — Every Step of the Way</h2><p>I've been working in this field for the past 3 years, and I understand how important placements and career growth are for every student. That's why I personally take one-on-one interview preparation sessions — to help you feel confident, prepared, and ready to crack your placement in one go. Your success is our success. And we're here to support you at every step.</p><p><strong>Musa Raza</strong> – CEO, CareerNest</p><a class="btn-primary" onclick="nav('about')">About Us</a></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========== SOCIAL IMPACT PAGE (FULLY UPDATED FROM WORKVENTURES) ========== -->
+<div class="page active" id="page-social-impact">
+  <div class="page-hero">
+    <h1>Driving Positive Social Impact in Australia</h1>
+    <p style="max-width: 800px; margin: 20px auto 0;">We combat youth unemployment, bridge the digital divide, and promote a circular economy — creating lasting change for individuals and communities.</p>
+  </div>
+
+  <section class="section-light">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Impact At A Glance</h2>
+        <div class="divider"></div>
+        <p>In 2025, CareerNest made significant contributions to communities across Australia.</p>
+      </div>
+      <div class="impact-stats-grid">
+        <div class="impact-card"><div class="impact-number">6,000+</div><div class="impact-label">Affordable Technology Packs</div><div class="impact-sub">Provided to individuals nationwide</div></div>
+        <div class="impact-card"><div class="impact-number">50</div><div class="impact-label">Young People Assisted</div><div class="impact-sub">With qualifications & employment</div></div>
+        <div class="impact-card"><div class="impact-number">116</div><div class="impact-label">Tonnes of E-waste</div><div class="impact-sub">Diverted from landfill</div></div>
+        <div class="impact-card"><div class="impact-number">728k+</div><div class="impact-label">Individuals' Data Protected</div><div class="impact-sub">Through cyber security solutions</div></div>
       </div>
     </div>
   </section>
 
   <section class="section-gray">
-    <div class="container"><div class="section-header"><h2>What Our Partners Say</h2><div class="divider"></div></div>
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:25px;">
-        <div class="testimonial-card" style="background:white; border-radius:6px; padding:30px; box-shadow:0 3px 15px rgba(0,0,0,0.07); border-top:4px solid var(--orange);"><p>"CareerNest connected me to an amazing placement where I learned more than I ever expected. It truly kickstarted my career."</p><div><strong>Sophie M., Business Student</strong></div></div>
-        <div class="testimonial-card" style="background:white; border-radius:6px; padding:30px; box-shadow:0 3px 15px rgba(0,0,0,0.07); border-top:4px solid var(--orange);"><p>"Working with CareerNest has made our placement process seamless. Our students are now more prepared and confident."</p><div><strong>David L., Placement Coordinator</strong></div></div>
-        <div class="testimonial-card" style="background:white; border-radius:6px; padding:30px; box-shadow:0 3px 15px rgba(0,0,0,0.07); border-top:4px solid var(--orange);"><p>"The affordable laptops program helped our GO Scholars access technology. CareerNest is a trusted partner for digital inclusion."</p><div><strong>Charlene Davison, GO Foundation</strong></div></div>
+    <div class="container">
+      <div class="section-header"><h2>40+ Years of Community Empowerment</h2><div class="divider"></div><p>For over four decades, CareerNest has been committed to empowering organisations and individuals to create inclusive, vibrant communities.</p></div>
+      <div style="text-align:center; margin: 30px 0;"><i class="fas fa-chart-line" style="font-size: 48px; color: var(--orange); opacity: 0.7;"></i><p style="margin-top:15px;">View our social impact reports: 2019 | 2020 | 2021 | 2022 | 2023 | 2024</p></div>
+    </div>
+  </section>
+
+  <section class="section-light">
+    <div class="container">
+      <div class="about-grid">
+        <div><h2>Protecting the Data of Vulnerable Individuals</h2><p>Our cybersecurity program is committed to minimising cyber threats faced by NFP organisations. We start with in-depth cyber risk assessments to uncover vulnerabilities, safeguarding sensitive data and strengthening cybersecurity for organisations and the communities they serve.</p><ul style="margin-top:20px; list-style: none;"><li><i class="fas fa-shield-alt" style="color:var(--orange);"></i> <strong>51 NFPs</strong> supported with cyber security</li><li><i class="fas fa-user-lock" style="color:var(--orange);"></i> <strong>728,590 individuals'</strong> data protected</li></ul></div>
+        <div><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cyber Security" style="border-radius:12px;"></div>
       </div>
     </div>
   </section>
 
-  <section class="section-navy">
-    <div class="container contact-section">
-      <div class="contact-form"><h2 style="color:white;">Get In Touch</h2><div class="form-group"><input type="text" placeholder="Your Name"></div><div class="form-group"><input type="email" placeholder="Email"></div><div class="form-group"><textarea placeholder="Message" rows="4"></textarea></div><button class="btn-primary">Submit</button></div>
-      <div><div class="contact-info-block"><h3>Connect With Us</h3><p><i class="fas fa-map-marker-alt"></i> Wetherill Park NSW 2164, Australia</p><p><i class="fas fa-phone"></i> +61 3 8658 7921</p><p><i class="fas fa-envelope"></i> info@careernest.com.au</p></div></div>
+  <section class="section-gray">
+    <div class="container">
+      <div class="section-header"><h2>Social Inclusion For Young People</h2><div class="divider"></div><p>Our traineeship and work placement programs provide real-world experience, qualifications, and a wage — with ongoing support to ensure success.</p></div>
+      <div class="impact-stats-grid">
+        <div class="impact-card"><div class="impact-number">25,644</div><div class="impact-label">Young People Assisted</div><div class="impact-sub">To improve work skills & opportunities</div></div>
+        <div class="impact-card"><div class="impact-number">92%</div><div class="impact-label">Traineeship Completion Rate</div><div class="impact-sub">Well above national average</div></div>
+        <div class="impact-card"><div class="impact-number">1,868</div><div class="impact-label">Work Placement Students</div><div class="impact-sub">Gaining real experience</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-light">
+    <div class="container">
+      <h2 style="text-align:center; margin-bottom:30px;">Reducing The Digital Divide</h2>
+      <div class="about-grid">
+        <div><img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Digital Inclusion"></div>
+        <div><p>We support individuals, not-for-profits, and businesses by providing affordable technology. Since 2000, we have distributed more than <strong>108,000 technology packs</strong> to students, job seekers, Aboriginal young people, seniors, people in social housing, and people with disabilities.</p><div style="margin:20px 0;"><i class="fas fa-headset"></i> <strong>72,167 tech calls answered</strong><br><i class="fas fa-clock"></i> <strong>14,097 hours</strong> on support calls<br><i class="fas fa-envelope"></i> <strong>27,183 support emails</strong> addressed</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gray">
+    <div class="container">
+      <div class="section-header"><h2>Circular Economy & E-Waste</h2><div class="divider"></div><p>We refurbish and repair devices to reduce e-waste, assisting major corporations with extending technology lifecycles.</p></div>
+      <div class="impact-stats-grid">
+        <div class="impact-card"><div class="impact-number">3,989+</div><div class="impact-label">Tonnes of E-waste Diverted</div><div class="impact-sub">From landfill</div></div>
+        <div class="impact-card"><div class="impact-number">60%</div><div class="impact-label">Re-purposed</div><div class="impact-sub">Of collected units</div></div>
+        <div class="impact-card"><div class="impact-number">1.65M</div><div class="impact-label">Units Collected</div><div class="impact-sub">Responsibly processed</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-light">
+    <div class="container">
+      <div class="section-header"><h2>What Our Partners Say</h2><div class="divider"></div></div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card"><p>"CareerNest understood our needs and the challenges faced by families. Their efficient processes enabled us to help thousands of students access technology."</p><strong>— Doug Taylor, The Smith Family</strong></div>
+        <div class="testimonial-card"><p>"CareerNest provided digital skills development to address students' literacy needs. We hope to continue our impactful relationship."</p><strong>— Julia Bain, KPMG Australia</strong></div>
+        <div class="testimonial-card"><p>"CareerNest vets applicants very well — we receive high quality candidates. We always recommend them to anyone considering hiring a trainee."</p><strong>— Maria Danieli, AD Danieli Accountants</strong></div>
+        <div class="testimonial-card"><p>"They have a flexible traineeship program with dedicated staff for easy management. A supportive and collaborative community partner."</p><strong>— Kerry Lambert, Uniting</strong></div>
+        <div class="testimonial-card"><p>"CareerNest's performance is excellent. They deliver quality, reliable IT solutions. As our needs evolve, I am confident they will continue to develop solutions that work for us."</p><strong>— David Hetherington, Public Education Foundation</strong></div>
+        <div class="testimonial-card"><p>"For over a decade, we've partnered with CareerNest. Their flexibility and focus on customer perspective have helped strengthen our customer base."</p><strong>— Khristopher Molina, TES-AMM</strong></div>
+      </div>
     </div>
   </section>
 </div>
 
 <!-- ========== ADDITIONAL PAGES ========== -->
 <div class="page" id="page-about"><div class="page-hero"><h1>About CareerNest</h1><p>Australia's leading student placement & IT social enterprise.</p></div><section class="section-light"><div class="container"><p>CareerNest was founded to bridge the gap between education and employment. We provide real-world placement experiences, affordable technology, and youth employment pathways.</p></div></section></div>
-<div class="page" id="page-social-impact"><div class="page-hero"><h1>Social Impact</h1></div><section><div class="container"><p>5,000+ young people assisted, 100,000+ tech packs distributed.</p></div></section></div>
 <div class="page" id="page-contact"><div class="page-hero"><h1>Contact Us</h1></div><section><div class="container"><div class="contact-section"><div><h2>Send Message</h2><input placeholder="Name"><input placeholder="Email"><textarea></textarea><button class="btn-primary">Send</button></div><div><p>Email: info@careernest.com.au | Phone: 1800 112 205</p></div></div></div></section></div>
 <div class="page" id="page-history"><div class="page-hero"><h1>Our History</h1></div><section><div class="container"><p>Founded in 1979, CareerNest has grown into Australia's leading placement & IT social enterprise.</p></div></section></div>
 <div class="page" id="page-board"><div class="page-hero"><h1>Our Board</h1></div><section><div class="container"><p>Experienced Board dedicated to social impact.</p></div></section></div>
@@ -617,41 +749,27 @@
 <div class="scroll-top" id="scrollTopBtn"><i class="fas fa-chevron-up"></i></div>
 
 <script>
-  // Smooth page navigation with transition reset
   function nav(pageId) {
     const allPages = document.querySelectorAll('.page');
     const target = document.getElementById('page-' + pageId);
     if (!target) {
-      // fallback to home
       document.getElementById('page-home').classList.add('active');
       allPages.forEach(p => { if(p.id !== 'page-home') p.classList.remove('active'); });
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    // disable active class on all pages, then add to target
-    allPages.forEach(page => {
-      page.classList.remove('active');
-    });
+    allPages.forEach(page => { page.classList.remove('active'); });
     target.classList.add('active');
-    // smooth scroll to top after small delay
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 20);
+    setTimeout(() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }, 20);
   }
   
-  // scroll to top button with smooth + visibility
   const scrollBtn = document.getElementById('scrollTopBtn');
   function handleScrollVisibility() {
-    if (window.scrollY > 300) {
-      scrollBtn.classList.add('visible');
-    } else {
-      scrollBtn.classList.remove('visible');
-    }
+    if (window.scrollY > 300) scrollBtn.classList.add('visible');
+    else scrollBtn.classList.remove('visible');
   }
   window.addEventListener('scroll', handleScrollVisibility);
-  scrollBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  scrollBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
   handleScrollVisibility();
 </script>
 </body>
